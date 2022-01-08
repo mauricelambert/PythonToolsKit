@@ -1,6 +1,6 @@
-![PyCommons logo](https://mauricelambert.github.io/info/python/code/PyCommons_small.png "PyCommons logo")
+![PythonToolsKit logo](https://mauricelambert.github.io/info/python/code/PythonToolsKit/logo_small.png "PythonToolsKit logo")
 
-# PyCommons
+# PythonToolsKit
 
 ## Description
 
@@ -58,35 +58,35 @@ This package require:
 ## Installation
 
 ```bash
-pip install PyCommons
+pip install PythonToolsKit
 ```
 
 ## Usages
 
 Examples with responses (mode console) are available in HTML documentation.
 
-Note for import: add `PyCommons.<module>`
+Note for import: add `PythonToolsKit.<module>`
 ```python
-from PyCommons.Timeout import *
-import PyCommons.Timeout
+from PythonToolsKit.Timeout import *
+import PythonToolsKit.Timeout
 ```
 
 ## Links
 
- - [Github Page](https://github.com/mauricelambert/PyCommons/)
- - [Documentation Timeout](https://mauricelambert.github.io/info/python/code/PyCommons/Timeout.html)
- - [Documentation Terminal](https://mauricelambert.github.io/info/python/code/PyCommons/Terminal.html)
- - [Documentation StringF](https://mauricelambert.github.io/info/python/code/StringF.html)
- - [Documentation PrintF](https://mauricelambert.github.io/info/python/code/PrintF.html)
- - [Documentation Process](https://mauricelambert.github.io/info/python/code/Process.html)
- - [Documentation Logs](https://mauricelambert.github.io/info/python/code/Logs.html)
- - [Documentation GetPass](https://mauricelambert.github.io/info/python/code/GetPass.html)
- - [Documentation Encodings](https://mauricelambert.github.io/info/python/code/Encodings.html)
- - [Documentation DictObject](https://mauricelambert.github.io/info/python/code/DictObject.html)
- - [Documentation Report](https://mauricelambert.github.io/info/python/code/Report.html)
- - [Documentation urlopen](https://mauricelambert.github.io/info/python/code/urlopen.html)
- - [Documentation cleandict](https://mauricelambert.github.io/info/python/code/cleandict.html)
- - [Pypi package](https://pypi.org/project/PyCommons/)
+ - [Github Page](https://github.com/mauricelambert/PythonToolsKit/)
+ - [Documentation Timeout](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Timeout.html)
+ - [Documentation Terminal](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Terminal.html)
+ - [Documentation StringF](https://mauricelambert.github.io/info/python/code/PythonToolsKit/StringF.html)
+ - [Documentation PrintF](https://mauricelambert.github.io/info/python/code/PythonToolsKit/PrintF.html)
+ - [Documentation Process](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Process.html)
+ - [Documentation Logs](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Logs.html)
+ - [Documentation GetPass](https://mauricelambert.github.io/info/python/code/PythonToolsKit/GetPass.html)
+ - [Documentation Encodings](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Encodings.html)
+ - [Documentation DictObject](https://mauricelambert.github.io/info/python/code/PythonToolsKit/DictObject.html)
+ - [Documentation Report](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Report.html)
+ - [Documentation urlopen](https://mauricelambert.github.io/info/python/code/PythonToolsKit/urlopen.html)
+ - [Documentation cleandict](https://mauricelambert.github.io/info/python/code/PythonToolsKit/cleandict.html)
+ - [Pypi package](https://pypi.org/project/PythonToolsKit/)
 
 ## Licence
 

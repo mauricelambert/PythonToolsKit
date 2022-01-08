@@ -1,5 +1,5 @@
 import platform
-import PyCommons as package
+import PythonToolsKit as package
 from subprocess import check_call, DEVNULL
 from setuptools import setup, find_packages
 from setuptools.command.develop import develop
@@ -68,18 +68,18 @@ setup(
     long_description_content_type="text/markdown",
     url=package.__url__,
     project_urls={
-        "Documentation Timeout": "https://mauricelambert.github.io/info/python/code/PyCommons/Timeout.html",
-        "Documentation Terminal": "https://mauricelambert.github.io/info/python/code/PyCommons/Terminal.html",
-        "Documentation StringF": "https://mauricelambert.github.io/info/python/code/PyCommons/StringF.html",
-        "Documentation PrintF": "https://mauricelambert.github.io/info/python/code/PyCommons/PrintF.html",
-        "Documentation Process": "https://mauricelambert.github.io/info/python/code/PyCommons/Process.html",
-        "Documentation Logs": "https://mauricelambert.github.io/info/python/code/PyCommons/Logs.html",
-        "Documentation GetPass": "https://mauricelambert.github.io/info/python/code/PyCommons/GetPass.html",
-        "Documentation Encodings": "https://mauricelambert.github.io/info/python/code/PyCommons/Encodings.html",
-        "Documentation DictObject": "https://mauricelambert.github.io/info/python/code/PyCommons/DictObject.html",
-        "Documentation Report": "https://mauricelambert.github.io/info/python/code/PyCommons/Report.html",
-        "Documentation urlopen": "https://mauricelambert.github.io/info/python/code/PyCommons/urlopen.html",
-        "Documentation cleandict": "https://mauricelambert.github.io/info/python/code/PyCommons/cleandict.html",
+        "Documentation Timeout": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/Timeout.html",
+        "Documentation Terminal": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/Terminal.html",
+        "Documentation StringF": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/StringF.html",
+        "Documentation PrintF": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/PrintF.html",
+        "Documentation Process": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/Process.html",
+        "Documentation Logs": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/Logs.html",
+        "Documentation GetPass": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/GetPass.html",
+        "Documentation Encodings": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/Encodings.html",
+        "Documentation DictObject": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/DictObject.html",
+        "Documentation Report": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/Report.html",
+        "Documentation urlopen": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/urlopen.html",
+        "Documentation cleandict": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/cleandict.html",
     },
     classifiers=[
         "Programming Language :: Python",
