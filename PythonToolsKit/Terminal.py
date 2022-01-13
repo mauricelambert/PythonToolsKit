@@ -23,7 +23,7 @@
 This package implements tools to build python package and tools.
 """
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -455,16 +455,6 @@ class Terminal:
         """
         This function cleans the next line
         (take position on the start of the cleaned line).
-        """
-
-        stdout_write(f"{char_ANSI}K")
-        stdout_flush()
-
-    def clean_next_lines() -> None:
-
-        """
-        This function cleans the next lines
-        (take position on the next line).
         """
 
         stdout_write(f"{char_ANSI}K")

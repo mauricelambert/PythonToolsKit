@@ -23,33 +23,41 @@ r"""
 This package implements tools to build python package and tools.
 
 >>> from PrintF import printf
->>> import PrintF
->>> printf("My message")
+>>> printf('My message')
 [+] My message
 >>> printf("My message", state="NOK")
 [-] My message
 >>> printf("My message", colored=False, state="ERROR")
-[+] My message
+[!] My message
 >>> printf("My message", end="\n\n", state="INFO")
 [*] My message
 
 >>> printf("My message", start="\n", state="TODO")
 
 [#] My message
->>> printf("My message", pourcent=20, state="ASK") or print()
+>>> printf("My message", pourcent=20, state="ASK") or print("\n")
 [?] My message
-[*] 20%
->>> printf("My message", pourcent=20) or printf("My message", pourcent=55) or print()
+[?] 20% |████                |
+>>> printf("My message", pourcent=20) or printf("My message", pourcent=55) or print("\n")
+[+] My message
+[+] 55% |███████████         |
+>>> printf("My message", pourcent=20) or print() or printf("My message", pourcent=55) or print("\n")
 [+] My message
 [+] My message
-[*] 55%
+[+] 55% |███████████         |
+>>> printf("My message", add_progressbar=False, pourcent=55) or print("\n")
+[+] My message
+[+] 55%
+>>> printf("My message", oneline_progress=True, pourcent=55) or print()
+[+] My message 55% |███████████         |
+>>> import PrintF
 >>> PrintF.STATES["TEST"] = ("[T]", "\x1b[37m")
 >>> printf("My OK message", state="TEST")
 [T] My OK message
->>>
+>>> 
 """
 
-__version__ = "0.0.1"
+__version__ = "0.0.3"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -71,13 +79,13 @@ __copyright__ = copyright
 
 __all__ = ["printf", "STATES", "COLOR"]
 
-from sys import stdout, argv
+from sys import argv
 from typing import Union
 
 STATES = {
     "OK": ("[+]", "\x1b[32m"),
     "NOK": ("[-]", "\x1b[33m"),
-    "ERROR": ("[+]", "\x1b[31m"),
+    "ERROR": ("[!]", "\x1b[31m"),
     "INFO": ("[*]", "\x1b[34m"),
     "TODO": ("[#]", "\x1b[35m"),
     "ASK": ("[?]", "\x1b[36m"),
@@ -85,7 +93,6 @@ STATES = {
 COLOR = "--no-color" not in argv
 
 states_get = STATES.get
-flush = stdout.flush
 
 
 def printf(
@@ -94,6 +101,9 @@ def printf(
     colored: bool = COLOR,
     pourcent: Union[int, str] = None,
     start: str = "",
+    end: str = "\n",
+    add_progressbar: bool = True,
+    oneline_progress: bool = False,
     **kwargs,
 ) -> None:
 
@@ -103,15 +113,45 @@ def printf(
 
     show, color = states_get(state)
 
-    if state is not None:
-        if colored:
-            print(f"{start}{color}{show} {string}\x1b[0m", **kwargs)
-        else:
-            print(f"{start}{show} {string}", **kwargs)
-    else:
+    if state is None:
         raise ValueError("Invalid state, state should be a key of STATES...")
 
     if pourcent is not None:
-        printf(f"{pourcent}%", state="INFO", end="\r")
+        
+        if oneline_progress:
+            progress_bar = f"{pourcent}%"
+        else:
+            progress_bar = f"{color}{show} {pourcent}%"
 
-    flush()
+        if add_progressbar:
+            char = '\u2588'
+            progress_state = int(pourcent) // 5
+            progress_bar += (
+                f" |{char * progress_state}{' ' * (20 - progress_state)}|"
+            )
+    else:
+        progress_bar = ""
+
+    
+    if colored:
+        if oneline_progress:
+            to_print = (
+                f"\x1b[K{start}{color}{show} {string} {progress_bar}"
+                f"\x1b[0m{end}\x1b[F"
+            )
+        else:
+            to_print = (
+                f"\x1b[K{start}{color}{show} {string}\x1b[0m{end}"
+                f"{progress_bar}\x1b[0m\x1b[F"
+            )
+    else:
+        if oneline_progress:
+            to_print = (
+                f"\x1b[K{start}{show} {string}{progress_bar}{end}\x1b[F"
+            )
+        else:
+            to_print = (
+                f"\x1b[K{start}{show} {string}{end}{progress_bar}\x1b[F"
+            )
+
+    print(to_print, flush=True, **kwargs, end="")
