@@ -21,9 +21,29 @@
 
 """
 This package implements tools to build python package and tools.
+
+>>> from Dict import *
+>>> a = {"a": 0, 0: "a", (0, "a"): ("a", 0)}
+>>> b = a.copy()
+>>> cleandict(b, ["a"])
+{'a': 0}
+>>> cleandict(a, ["a"], invers=True)
+{0: 'a', (0, 'a'): ('a', 0)}
+>>> a
+{0: 'a', (0, 'a'): ('a', 0)}
+>>> b
+{'a': 0}
+>>> a = {"a": 0, 0: "a", (0, "a"): ("a", 0)}
+>>> copy_cleandict(a, ["a"])
+{'a': 0}
+>>> copy_cleandict(a, ["a"], invers=True)
+{0: 'a', (0, 'a'): ('a', 0)}
+>>> a
+{'a': 0, 0: 'a', (0, 'a'): ('a', 0)}
+>>>
 """
 
-__version__ = "0.0.5"
+__version__ = "0.0.2"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -43,4 +63,39 @@ under certain conditions.
 __license__ = license
 __copyright__ = copyright
 
-print(copyright)
+__all__ = ["cleandict", "copy_cleandict"]
+
+from collections.abc import Hashable
+from typing import List
+
+
+def cleandict(dict_: dict, keys: List[Hashable], invers: bool = False) -> dict:
+
+    """
+    This function clean a dictionary.
+    """
+
+    if invers:
+        for key in keys:
+            del dict_[key]
+        return dict_
+
+    to_delete = []
+    for key in dict_.keys():
+        if key not in keys:
+            to_delete.append(key)
+
+    for key in to_delete:
+        del dict_[key]
+    return dict_
+
+
+def copy_cleandict(dict_: dict, *args, **kwargs) -> dict:
+
+    """
+    This function copy and clean a dictionary.
+
+    args and kwargs are passed to cleandict.
+    """
+
+    return cleandict(dict_.copy(), *args, **kwargs)

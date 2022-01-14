@@ -47,7 +47,7 @@ This package implements tools to build python package and tools.
 >>>
 """
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -160,8 +160,12 @@ class DefaultHandler(BaseHandler):
 
         def decorator(function: Callable) -> Callable:
 
-            self.functions[code] = function
+            for code in args:
+                FUNCTIONS_CODES[code] = function
+
             return function
+
+        return decorator
 
     def http_response(
         self,

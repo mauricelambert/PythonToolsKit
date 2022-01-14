@@ -45,8 +45,12 @@ Features implemented:
      - The frequency and percentage of filtered elements
   - urlopen:
      - New urlopen based on urllib.request with a easiest way to manage HTTP error code (using decorator)
-  - cleandict
-     - Clean dict (for example, after loading the API response, you want to keep only certain information)
+  - Dict:
+     - Clean dict (for example, after loading the API response, you want to keep only certain informations)
+  - Arguments:
+     - Password and password prompt
+     - Input file and stdin
+     - Output file and stdout
 
 ## Requirements
 
@@ -66,6 +70,7 @@ pip install PythonToolsKit
 Examples with responses (mode console) are available in HTML documentation.
 
 Note for import: add `PythonToolsKit.<module>`
+
 ```python
 from PythonToolsKit.Timeout import *
 import PythonToolsKit.Timeout
@@ -85,7 +90,8 @@ import PythonToolsKit.Timeout
  - [Documentation DictObject](https://mauricelambert.github.io/info/python/code/PythonToolsKit/DictObject.html)
  - [Documentation Report](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Report.html)
  - [Documentation urlopen](https://mauricelambert.github.io/info/python/code/PythonToolsKit/urlopen.html)
- - [Documentation cleandict](https://mauricelambert.github.io/info/python/code/PythonToolsKit/cleandict.html)
+ - [Documentation Dict](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Dict.html)
+ - [Documentation Arguments](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Arguments.html)
  - [Pypi package](https://pypi.org/project/PythonToolsKit/)
 
 ## Licence

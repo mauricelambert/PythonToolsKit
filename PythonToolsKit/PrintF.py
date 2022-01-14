@@ -117,14 +117,14 @@ def printf(
         raise ValueError("Invalid state, state should be a key of STATES...")
 
     if pourcent is not None:
-        
+
         if oneline_progress:
             progress_bar = f"{pourcent}%"
         else:
             progress_bar = f"{color}{show} {pourcent}%"
 
         if add_progressbar:
-            char = '\u2588'
+            char = "\u2588"
             progress_state = int(pourcent) // 5
             progress_bar += (
                 f" |{char * progress_state}{' ' * (20 - progress_state)}|"
@@ -132,7 +132,6 @@ def printf(
     else:
         progress_bar = ""
 
-    
     if colored:
         if oneline_progress:
             to_print = (
@@ -146,12 +145,8 @@ def printf(
             )
     else:
         if oneline_progress:
-            to_print = (
-                f"\x1b[K{start}{show} {string}{progress_bar}{end}\x1b[F"
-            )
+            to_print = f"\x1b[K{start}{show} {string}{progress_bar}{end}\x1b[F"
         else:
-            to_print = (
-                f"\x1b[K{start}{show} {string}{end}{progress_bar}\x1b[F"
-            )
+            to_print = f"\x1b[K{start}{show} {string}{end}{progress_bar}\x1b[F"
 
     print(to_print, flush=True, **kwargs, end="")
