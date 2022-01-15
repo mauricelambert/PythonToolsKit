@@ -6,7 +6,9 @@ PythonToolsKit/Arguments.py
 PythonToolsKit/Dict.py
 PythonToolsKit/DictObject.py
 PythonToolsKit/Encodings.py
+PythonToolsKit/Function.py
 PythonToolsKit/GetPass.py
+PythonToolsKit/List.py
 PythonToolsKit/Logs.py
 PythonToolsKit/PrintF.py
 PythonToolsKit/Process.py
@@ -15,6 +17,7 @@ PythonToolsKit/StringF.py
 PythonToolsKit/Terminal.py
 PythonToolsKit/TestTimeout.py
 PythonToolsKit/Timeout.py
+PythonToolsKit/Tuple.py
 PythonToolsKit/__init__.py
 PythonToolsKit/urlopen.py
 PythonToolsKit.egg-info/PKG-INFO

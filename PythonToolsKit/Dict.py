@@ -40,10 +40,44 @@ This package implements tools to build python package and tools.
 {0: 'a', (0, 'a'): ('a', 0)}
 >>> a
 {'a': 0, 0: 'a', (0, 'a'): ('a', 0)}
+>>> d = dict(zip([0,1], (2,3)))
+>>> _ = d | print
+0 2
+1 3
+>>> _ = d @ print
+0
+1
+>>> _ = d >> print
+2
+3
+>>> d - [0]
+{1: 3}
+>>> d + [0]
+{0: 2}
+>>> from math import factorial, gcd
+>>> d @= factorial
+>>> d
+{0: 1, 1: 1}
+>>> d = dict(zip([0,1], (2,3)))
+>>> d >>= factorial
+>>> d
+{0: 2, 1: 6}
+>>> d |= gcd
+>>> d
+{0: 2, 1: 1}
+>>> ~d
+{2: 0, 1: 1}
+>>> d -= [0]
+>>> d
+{1: 1}
+>>> d[2] = 0
+>>> d += [2]
+>>> d
+{2: 0}
 >>>
 """
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -63,10 +97,10 @@ under certain conditions.
 __license__ = license
 __copyright__ = copyright
 
-__all__ = ["cleandict", "copy_cleandict"]
+__all__ = ["cleandict", "copy_cleandict", "dict"]
 
-from collections.abc import Hashable
-from typing import List
+from collections.abc import Hashable, Iterator, Callable
+from typing import List, Dict, Any
 
 
 def cleandict(dict_: dict, keys: List[Hashable], invers: bool = False) -> dict:
@@ -99,3 +133,101 @@ def copy_cleandict(dict_: dict, *args, **kwargs) -> dict:
     """
 
     return cleandict(dict_.copy(), *args, **kwargs)
+
+
+class dict(dict):
+    def __or__(self, other: Callable) -> Dict[Hashable, Any]:
+
+        """
+        This function implements '<dict> | <function>'.
+        """
+
+        return dict((k, other(k, v)) for k, v in self.items())
+
+    def __ior__(self, other: Callable) -> Dict[Hashable, Any]:
+
+        """
+        This function implements '<dict> |= <function>'.
+        """
+
+        return dict((k, other(k, v)) for k, v in self.items())
+
+    def __matmul__(self, other: Callable) -> Dict[Hashable, Any]:
+
+        """
+        This function implements '<dict> @ function'.
+        """
+
+        return dict((k, other(k)) for k in self.keys())
+
+    def __imatmul__(self, other: Callable) -> Dict[Hashable, Any]:
+
+        """
+        This function implements '<dict> @= function'.
+        """
+
+        return dict((k, other(k)) for k in self.keys())
+
+    def __invert__(self) -> Dict[Hashable, Any]:
+
+        """
+        This function implements '~<dict>'.
+        """
+
+        return dict((v, k) for k, v in self.items())
+
+    def __inv__(self) -> Dict[Hashable, Any]:
+
+        """
+        This function implements '~<dict>'.
+        """
+
+        return dict((v, k) for k, v in self.items())
+
+    def __rshift__(self, other: Callable) -> Dict[Hashable, Any]:
+
+        """
+        This function implements '<dict> >> function'.
+        """
+
+        return dict((k, other(v)) for k, v in self.items())
+
+    def __irshift__(self, other: Callable) -> Dict[Hashable, Any]:
+
+        """
+        This function implements '<dict> >> function'.
+        """
+
+        return dict((k, other(v)) for k, v in self.items())
+
+    def __sub__(self, other: Iterator[Hashable]) -> Dict[Hashable, Any]:
+
+        """
+        This function implements '<dict> - <Iterator>'
+        """
+
+        return dict((k, v) for k, v in self.items() if k not in other)
+
+    def __isub__(self, other: Iterator[Hashable]) -> Dict[Hashable, Any]:
+
+        """
+        This function implements '<dict> -= <Iterator>'
+        """
+
+        return dict((k, v) for k, v in self.items() if k not in other)
+
+    def __add__(self, other: Iterator[Hashable]) -> Dict[Hashable, Any]:
+
+        """
+        This function implements '<dict> + <Iterator>'
+        """
+
+        return dict((k, v) for k, v in self.items() if k in other)
+
+    def __iadd__(self, other: Iterator[Hashable]) -> Dict[Hashable, Any]:
+
+        """
+        This function implements '<dict> += <Iterator>'
+        """
+
+        return dict((k, v) for k, v in self.items() if k in other)

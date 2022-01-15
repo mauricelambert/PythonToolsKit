@@ -21,9 +21,28 @@
 
 """
 This package implements tools to build python package and tools.
+
+>>> from Function import *
+>>> @def_Function
+def print_char(char): print(char)
+...
+>>> _ = print_char << "abc"
+a
+b
+c
+>>> print_char('a')
+a
+>>> print_char = Function(print)
+>>> _ = print_char << "abc"
+a
+b
+c
+>>> print_char('a')
+a
+>>>
 """
 
-__version__ = "0.0.6"
+__version__ = "0.0.1"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -43,4 +62,38 @@ under certain conditions.
 __license__ = license
 __copyright__ = copyright
 
-print(copyright)
+__all__ = ["def_Function", "Function"]
+
+from collections.abc import Callable
+from typing import List, Any, Iterator
+
+
+def def_Function(function: Callable) -> Callable:
+
+    """
+    This decorator transform basic function in Function.
+    """
+
+    return Function(function)
+
+
+class Function(Callable):
+
+    """
+    This class implements features for basic function.
+    """
+
+    def __init__(self, function: Callable):
+        self.function = function
+
+    def __call__(self, *args, **kwargs) -> Any:
+        return self.function(*args, **kwargs)
+
+    def __lshift__(self, other: Iterator) -> List[Any]:
+
+        """
+        This function implements '<Function> << <Iterator>'.
+        """
+
+        function = self.function
+        return [function(x) for x in other]
