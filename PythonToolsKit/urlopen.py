@@ -47,7 +47,7 @@ This package implements tools to build python package and tools.
 >>>
 """
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -86,8 +86,9 @@ from collections import Callable, Sequence
 from http import client as httpclient
 from urllib.error import HTTPError
 from functools import wraps
+from typing import Dict
 
-FUNCTIONS_CODES = {
+FUNCTIONS_CODES: Dict[int, Callable] = {
     200: lambda s, r, f, c, m, h: f,
     301: HTTPRedirectHandler().http_error_302,
     302: HTTPRedirectHandler().http_error_302,
@@ -115,7 +116,7 @@ def httpcode(*args: Sequence[int]) -> Callable:
     return decorator
 
 
-def build_opener() -> OpenerDirector:
+def build_opener(functions: Dict[int, Callable] = None) -> OpenerDirector:
 
     """
     This function creates an opener object
@@ -131,7 +132,7 @@ def build_opener() -> OpenerDirector:
     if hasattr(httpclient, "HTTPSConnection"):
         add_handler(HTTPSHandler())
 
-    add_handler(DefaultHandler())
+    add_handler(DefaultHandler(functions))
 
     return opener
 
@@ -147,8 +148,8 @@ class DefaultHandler(BaseHandler):
     max_redirections = 10
     auth_header = "Authorization"
 
-    def __init__(self):
-        functions = self.functions = FUNCTIONS_CODES.copy()
+    def __init__(self, functions: Dict[int, Callable] = None):
+        functions = self.functions = functions or FUNCTIONS_CODES.copy()
         self.functions_get = functions.get
 
     def httpcode(self, code: int) -> Callable:
@@ -200,4 +201,4 @@ class DefaultHandler(BaseHandler):
     https_response = http_response
 
 
-urlopen = build_opener().open
+urlopen = build_opener(FUNCTIONS_CODES).open
