@@ -47,6 +47,13 @@ Features implemented:
      - New urlopen based on urllib.request with a easiest way to manage HTTP error code (using decorator)
   - Dict:
      - Clean dict (for example, after loading the API response, you want to keep only certain informations)
+     - Operator (some basic functions callable from operator)
+  - List:
+     - Operator (some basic functions callable from operator)
+  - Tuple:
+     - Operator (some basic functions callable from operator)
+  - Function:
+     - Operator (some basic functions callable from operator)
   - Arguments:
      - Password and password prompt
      - Input file and stdin
@@ -92,6 +99,9 @@ import PythonToolsKit.Timeout
  - [Documentation urlopen](https://mauricelambert.github.io/info/python/code/PythonToolsKit/urlopen.html)
  - [Documentation Dict](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Dict.html)
  - [Documentation Arguments](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Arguments.html)
+ - [Documentation Tuple](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Tuple.html)
+ - [Documentation List](https://mauricelambert.github.io/info/python/code/PythonToolsKit/List.html)
+ - [Documentation Function](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Function.html)
  - [Pypi package](https://pypi.org/project/PythonToolsKit/)
 
 ## Licence
