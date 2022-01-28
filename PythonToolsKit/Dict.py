@@ -77,7 +77,7 @@ This package implements tools to build python package and tools.
 >>>
 """
 
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -114,10 +114,7 @@ def cleandict(dict_: dict, keys: List[Hashable], invers: bool = False) -> dict:
             del dict_[key]
         return dict_
 
-    to_delete = []
-    for key in dict_.keys():
-        if key not in keys:
-            to_delete.append(key)
+    to_delete = [key for key in dict_.keys() if key not in keys]
 
     for key in to_delete:
         del dict_[key]

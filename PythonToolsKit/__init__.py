@@ -23,7 +23,7 @@
 This package implements tools to build python package and tools.
 """
 
-__version__ = "0.0.7"
+__version__ = "0.0.8"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
