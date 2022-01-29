@@ -21,9 +21,11 @@
 
 """
 This package implements tools to build python package and tools.
+
+>>> test = import_from_filename("./test.py")
 """
 
-__version__ = "1.0.0"
+__version__ = "0.0.1"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -43,4 +45,21 @@ under certain conditions.
 __license__ = license
 __copyright__ = copyright
 
-print(copyright)
+__all__ = ["import_from_filename"]
+
+from importlib.util import spec_from_file_location, module_from_spec
+from os.path import basename, splitext
+from types import ModuleType
+
+
+def import_from_filename(filename: str) -> ModuleType:
+
+    """
+    This function returns a module from path/filename.
+    """
+
+    spec = spec_from_file_location(splitext(basename(filename))[0], filename)
+    module = module_from_spec(spec)
+    spec.loader.exec_module(module)
+
+    return module

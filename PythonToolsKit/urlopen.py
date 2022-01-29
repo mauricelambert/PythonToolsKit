@@ -152,7 +152,7 @@ class DefaultHandler(BaseHandler):
         functions = self.functions = functions or FUNCTIONS_CODES.copy()
         self.functions_get = functions.get
 
-    def httpcode(self, code: int) -> Callable:
+    def httpcode(self, *args: Sequence[int]) -> Callable:
 
         """
         This decorator change action on HTTP error

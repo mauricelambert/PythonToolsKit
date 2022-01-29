@@ -21,9 +21,22 @@
 
 """
 This package implements tools to build python package and tools.
+
+>>> from time import sleep
+>>> def sleep_and_print(time=2, text="end"): sleep(time) or print(text)
+...
+>>> SimpleThread(sleep_and_print, 3, text="Hello World")
+>>> @threadify
+... def sleep_and_print(time=2, text="end"): sleep(time) or print(text)
+...
+>>> sleep_and_print()
+>>> join_all()
+end
+Hello World
+>>>
 """
 
-__version__ = "1.0.0"
+__version__ = "0.0.1"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -43,4 +56,55 @@ under certain conditions.
 __license__ = license
 __copyright__ = copyright
 
-print(copyright)
+__all__ = ["SimpleThread", "threadify", "join_all"]
+
+from threading import (
+    Thread,
+    enumerate as get_threads,
+    current_thread,
+    main_thread,
+)
+from collections.abc import Callable
+from functools import wraps
+
+
+class SimpleThread(Thread):
+
+    """
+    This class implements a simple Thread calls.
+    """
+
+    def __init__(self, function: Callable, *args, **kwargs):
+        Thread.__init__(self, target=function, args=args, kwargs=kwargs)
+        self.start()
+
+
+def threadify(function: Callable) -> Callable:
+
+    """
+    This decorator implements a simple way to
+    call a function in a new thread.
+    """
+
+    @wraps(function)
+    def wrapper(*args, **kwargs) -> SimpleThread:
+
+        return SimpleThread(function, *args, **kwargs)
+
+    return wrapper
+
+
+def join_all():
+
+    """
+    This function get all threads and join it.
+
+    The current thread and the main thread are exclude.
+    """
+
+    thread_current = current_thread()
+    thread_main = main_thread()
+
+    for thread in get_threads():
+        if thread is not thread_current and thread is not thread_main:
+            thread.join()
