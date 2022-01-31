@@ -43,21 +43,32 @@ Features implemented:
      - Statistics
      - Sort and filter elements in the reports
      - The frequency and percentage of filtered elements
-  - urlopen:
+ - urlopen:
      - New urlopen based on urllib.request with a easiest way to manage HTTP error code (using decorator)
-  - Dict:
+ - Dict:
      - Clean dict (for example, after loading the API response, you want to keep only certain informations)
      - Operator (some basic functions callable from operator)
-  - List:
+ - List:
      - Operator (some basic functions callable from operator)
-  - Tuple:
+ - Tuple:
      - Operator (some basic functions callable from operator)
-  - Function:
+ - Function:
      - Operator (some basic functions callable from operator)
-  - Arguments:
+ - Arguments:
      - Password and password prompt
      - Input file and stdin
      - Output file and stdout
+ - Thread:
+     - Join all
+     - Class SimpleThread
+     - Thread decorator
+ - Import:
+     - import from path/filename
+ - GetFile:
+     - Research an existant file from current directory and lib directory
+     - Open an existant file from current directory or lib directory
+ - ScapyTools
+     - Command line arguments for scapy (ArgumentParser with an optional argument "interface" by default and iface research)
 
 ## Requirements
 
@@ -102,6 +113,10 @@ import PythonToolsKit.Timeout
  - [Documentation Tuple](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Tuple.html)
  - [Documentation List](https://mauricelambert.github.io/info/python/code/PythonToolsKit/List.html)
  - [Documentation Function](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Function.html)
+ - [Documentation Thread](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Thread.html)
+ - [Documentation Import](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Import.html")
+ - [Documentation ScapyTools](https://mauricelambert.github.io/info/python/code/PythonToolsKit/ScapyTools.html)
+ - [Documentation GetFile](https://mauricelambert.github.io/info/python/code/PythonToolsKit/GetFile.html)
  - [Pypi package](https://pypi.org/project/PythonToolsKit/)
 
 ## Licence
