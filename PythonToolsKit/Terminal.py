@@ -23,7 +23,7 @@
 This package implements tools to build python package and tools.
 """
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -258,7 +258,7 @@ class Terminal:
         if color > 255:
             raise ValueError(f"color ({color}) should be in range of 0 to 255")
 
-        stdout_write(f"{char_ANSI}38;5;{color}m")
+        stdout_write(f"{char_ANSI}38;5;{color}")
         stdout_flush()
 
     def change_background_color_8bits(color: int) -> None:
@@ -271,7 +271,7 @@ class Terminal:
         if color > 255:
             raise ValueError(f"color ({color}) should be in range of 0 to 255")
 
-        stdout_write(f"{char_ANSI}48;5;{color}m")
+        stdout_write(f"{char_ANSI}48;5;{color}")
         stdout_flush()
 
     def change_foreground_color(color: str, mode: int = 1) -> None:
@@ -294,7 +294,7 @@ class Terminal:
 
         color = colors_map[color].value
 
-        stdout_write(f"{char_ANSI}{mode}{color}m")
+        stdout_write(f"{char_ANSI}{mode}{color}")
         stdout_flush()
 
     def change_background_color(color: str, mode: int = 1) -> None:
@@ -317,7 +317,7 @@ class Terminal:
 
         color = colors_map[color].value
 
-        stdout_write(f"{char_ANSI}{mode}{color}m")
+        stdout_write(f"{char_ANSI}{mode}{color}")
         stdout_flush()
 
     def clean() -> None:
