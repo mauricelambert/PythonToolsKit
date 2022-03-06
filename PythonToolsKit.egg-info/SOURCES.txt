@@ -1,5 +1,3 @@
-LICENSE.txt
-MANIFEST.in
 README.md
 setup.py
 PythonToolsKit/Arguments.py
@@ -9,6 +7,7 @@ PythonToolsKit/Encodings.py
 PythonToolsKit/Function.py
 PythonToolsKit/GetFile.py
 PythonToolsKit/GetPass.py
+PythonToolsKit/GetType.py
 PythonToolsKit/Import.py
 PythonToolsKit/List.py
 PythonToolsKit/Logs.py

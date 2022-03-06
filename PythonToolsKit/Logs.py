@@ -103,6 +103,7 @@ def get_custom_logger(name: str = __name__) -> Logger:
     """
 
     logger = getLogger(name)
+    logger.propagate = False
 
     formatter = Formatter(
         fmt=(
@@ -126,6 +127,8 @@ logger_warning: Callable = logger.warning
 logger_error: Callable = logger.error
 logger_critical: Callable = logger.critical
 logger_log: Callable = logger.log
+
+logger.propagate: bool = False
 
 addLevelName(5, "TRACE")
 

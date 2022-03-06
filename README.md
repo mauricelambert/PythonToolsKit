@@ -69,6 +69,9 @@ Features implemented:
      - Open an existant file from current directory or lib directory
  - ScapyTools
      - Command line arguments for scapy (ArgumentParser with an optional argument "interface" by default and iface research)
+ - GetType
+     - Type string value (None, bool, int, float, IP)
+     - Numbers (int, float) and IP/network generator from string
 
 ## Requirements
 
@@ -94,6 +97,23 @@ from PythonToolsKit.Timeout import *
 import PythonToolsKit.Timeout
 ```
 
+## Unittests
+
+For `GetType` module i use `doctest` (unittests in documentation) and `coverage`:
+
+```bash
+python3 GetType.py             # run doctest with verbose mode
+python3 -m doctest GetType.py  # run doctest without verbose mode
+coverage run GetType.py        # Calcul coverage
+coverage report                # Report in console
+coverage html                  # Report in HTML page
+```
+
+| Module       | Coverage  | Statements | missing    |
+|--------------|-----------|------------|------------|
+| GetType.py   | 100%      | 130        | 000        |
+|              |           |            |            |
+
 ## Links
 
  - [Github Page](https://github.com/mauricelambert/PythonToolsKit/)
@@ -117,6 +137,7 @@ import PythonToolsKit.Timeout
  - [Documentation Import](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Import.html)
  - [Documentation ScapyTools](https://mauricelambert.github.io/info/python/code/PythonToolsKit/ScapyTools.html)
  - [Documentation GetFile](https://mauricelambert.github.io/info/python/code/PythonToolsKit/GetFile.html)
+ - [Documentation GetType](https://mauricelambert.github.io/info/python/code/PythonToolsKit/GetType.html)
  - [Pypi package](https://pypi.org/project/PythonToolsKit/)
 
 ## Licence

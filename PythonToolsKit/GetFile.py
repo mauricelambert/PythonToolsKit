@@ -25,7 +25,7 @@ This package implements tools to build python package and tools.
 >>> file = open("./configuration.conf")             # File should exist
 >>> file.close()                                    # File should be closed
 >>> file = open("./configuration.conf", "wb")       # File should exist
->>> file.write("my configuration")
+>>> file.write(b"my configuration")
 >>> file.close()                                    # File should be closed
 >>> filename = get_real_path("./data.db")           # File should exist, slower
 >>> filename = get_real_path("./data.db", __FILE__) # File should exist, faster

@@ -88,6 +88,7 @@ setup(
         "Documentation Import": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/Import.html",
         "Documentation ScapyTools": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/ScapyTools.html",
         "Documentation GetFile": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/GetFile.html",
+        "Documentation GetType": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/GetType.html",
     },
     classifiers=[
         "Programming Language :: Python",
