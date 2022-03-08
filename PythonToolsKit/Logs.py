@@ -53,7 +53,7 @@ This package implements tools to build python package and tools.
 >>>
 """
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -86,41 +86,42 @@ from logging import StreamHandler, Formatter, Logger, getLogger, addLevelName
 from logging.handlers import RotatingFileHandler
 from time import gmtime, asctime, strftime
 from collections.abc import Callable
+from sys import stderr, _getframe
 from csv import writer, QUOTE_ALL
 from types import FunctionType
 from functools import wraps
 from os.path import exists
 from gzip import compress
 from io import StringIO
-from sys import stdout
 from os import remove
 
 
-def get_custom_logger(name: str = __name__) -> Logger:
+def get_custom_logger(name: str = None) -> Logger:
 
     """
     This function create a custom logger.
     """
 
-    logger = getLogger(name)
+    logger = getLogger(name or _getframe().f_code.co_filename)
     logger.propagate = False
 
-    formatter = Formatter(
-        fmt=(
-            "%(asctime)s%(levelname)-9s(%(levelno)s) "
-            "{%(name)s - %(filename)s:%(lineno)d} %(message)s"
-        ),
-        datefmt="[%Y-%m-%d %H:%M:%S] ",
-    )
-    stream = StreamHandler(stream=stdout)
-    stream.setFormatter(formatter)
+    if not logger.handlers:
+        formatter = Formatter(
+            fmt=(
+                "%(asctime)s%(levelname)-9s(%(levelno)s) "
+                "{%(name)s - %(filename)s:%(lineno)d} %(message)s"
+            ),
+            datefmt="[%Y-%m-%d %H:%M:%S] ",
+        )
+        stream = StreamHandler(stream=stderr)
+        stream.setFormatter(formatter)
 
-    logger.addHandler(stream)
+        logger.addHandler(stream)
 
     return logger
 
 
-logger: Logger = get_custom_logger()
+logger: Logger = get_custom_logger(__name__)
 logger_debug: Callable = logger.debug
 logger_info: Callable = logger.info
 logger_warning: Callable = logger.warning

@@ -47,7 +47,7 @@ This package implements tools to build python package and tools.
 >>>
 """
 
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -72,7 +72,7 @@ __all__ = ["httpcode", "DefaultHandler", "build_opener"]
 from urllib.request import (
     build_opener,
     Request,
-    OpenerDirector,
+    OpenerDirector as _OpenerDirector,
     BaseHandler,
     HTTPRedirectHandler,
     HTTPBasicAuthHandler,
@@ -85,8 +85,9 @@ from http.client import HTTPResponse, HTTPMessage
 from collections import Callable, Sequence
 from http import client as httpclient
 from urllib.error import HTTPError
+from typing import Dict, Any
 from functools import wraps
-from typing import Dict
+from ssl import SSLContext
 
 FUNCTIONS_CODES: Dict[int, Callable] = {
     200: lambda s, r, f, c, m, h: f,
@@ -114,6 +115,19 @@ def httpcode(*args: Sequence[int]) -> Callable:
         return function
 
     return decorator
+
+
+class OpenerDirector(_OpenerDirector):
+    def open(self, *args, context: SSLContext = None, **kwargs) -> Any:
+
+        """
+        This function implements the default URL opener.
+        """
+
+        if context is not None:
+            self.handlers[-1]._context = context
+
+        return super(OpenerDirector, self).open(*args, **kwargs)
 
 
 def build_opener(functions: Dict[int, Callable] = None) -> OpenerDirector:
@@ -191,12 +205,9 @@ class DefaultHandler(BaseHandler):
         if function is not None:
             return function(*args)
         else:
-            try:
-                raise HTTPError(
-                    request.full_url, code, message, headers, response
-                )
-            except HTTPError:
-                raise NotImplementedError
+            raise NotImplementedError from HTTPError(
+                request.full_url, code, message, headers, response
+            )
 
     https_response = http_response
 

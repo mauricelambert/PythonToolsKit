@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: PythonToolsKit
-Version: 1.0.3
+Version: 1.0.4
 Summary: This package implements tools to build python package and tools.
 Home-page: https://github.com/mauricelambert/PythonToolsKit
 Author: Maurice Lambert
@@ -29,6 +29,7 @@ Project-URL: Documentation Import, https://mauricelambert.github.io/info/python/
 Project-URL: Documentation ScapyTools, https://mauricelambert.github.io/info/python/code/PythonToolsKit/ScapyTools.html
 Project-URL: Documentation GetFile, https://mauricelambert.github.io/info/python/code/PythonToolsKit/GetFile.html
 Project-URL: Documentation GetType, https://mauricelambert.github.io/info/python/code/PythonToolsKit/GetType.html
+Project-URL: Documentation Random, https://mauricelambert.github.io/info/python/code/PythonToolsKit/Random.html
 Keywords: Timeout,Terminal,Colors,Formatting,Print,Object,Process,CSV,Logs,Getpass,Password,Ask,*,Encodings,Report,Markdown,HTML,JSON,Arguments,Input,Output,Operator,List,Tuple,Dict,Function
 Platform: Windows
 Platform: Linux
@@ -42,6 +43,7 @@ Classifier: Operating System :: Microsoft :: Windows
 Classifier: Operating System :: MacOS
 Requires-Python: >=3.6
 Description-Content-Type: text/markdown
+License-File: LICENSE.txt
 
 ![PythonToolsKit logo](https://mauricelambert.github.io/info/python/code/PythonToolsKit/logo_small.png "PythonToolsKit logo")
 
@@ -112,11 +114,12 @@ Features implemented:
  - GetFile:
      - Research an existant file from current directory and lib directory
      - Open an existant file from current directory or lib directory
- - ScapyTools
+ - ScapyTools:
      - Command line arguments for scapy (ArgumentParser with an optional argument "interface" by default and iface research)
  - GetType
      - Type string value (None, bool, int, float, IP)
      - Numbers (int, float) and IP/network generator from string
+ - Random: Get random strings (random length, generator, check for strong password, secure, urlsafe, ...)
 
 ## Requirements
 
@@ -183,6 +186,7 @@ coverage html                  # Report in HTML page
  - [Documentation ScapyTools](https://mauricelambert.github.io/info/python/code/PythonToolsKit/ScapyTools.html)
  - [Documentation GetFile](https://mauricelambert.github.io/info/python/code/PythonToolsKit/GetFile.html)
  - [Documentation GetType](https://mauricelambert.github.io/info/python/code/PythonToolsKit/GetType.html)
+ - [Documentation Random](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Random.html)
  - [Pypi package](https://pypi.org/project/PythonToolsKit/)
 
 ## Licence

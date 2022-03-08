@@ -1,3 +1,5 @@
+LICENSE.txt
+MANIFEST.in
 README.md
 setup.py
 PythonToolsKit/Arguments.py
@@ -13,6 +15,7 @@ PythonToolsKit/List.py
 PythonToolsKit/Logs.py
 PythonToolsKit/PrintF.py
 PythonToolsKit/Process.py
+PythonToolsKit/Random.py
 PythonToolsKit/Report.py
 PythonToolsKit/ScapyTools.py
 PythonToolsKit/StringF.py

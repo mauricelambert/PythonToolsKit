@@ -67,11 +67,12 @@ Features implemented:
  - GetFile:
      - Research an existant file from current directory and lib directory
      - Open an existant file from current directory or lib directory
- - ScapyTools
+ - ScapyTools:
      - Command line arguments for scapy (ArgumentParser with an optional argument "interface" by default and iface research)
  - GetType
      - Type string value (None, bool, int, float, IP)
      - Numbers (int, float) and IP/network generator from string
+ - Random: Get random strings (random length, generator, check for strong password, secure, urlsafe, ...)
 
 ## Requirements
 
@@ -138,6 +139,7 @@ coverage html                  # Report in HTML page
  - [Documentation ScapyTools](https://mauricelambert.github.io/info/python/code/PythonToolsKit/ScapyTools.html)
  - [Documentation GetFile](https://mauricelambert.github.io/info/python/code/PythonToolsKit/GetFile.html)
  - [Documentation GetType](https://mauricelambert.github.io/info/python/code/PythonToolsKit/GetType.html)
+ - [Documentation Random](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Random.html)
  - [Pypi package](https://pypi.org/project/PythonToolsKit/)
 
 ## Licence
