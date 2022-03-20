@@ -58,6 +58,8 @@ Features implemented:
      - Password and password prompt
      - Input file and stdin
      - Output file and stdout
+     - Verbose mode
+     - Debug mode
  - Thread:
      - Join all
      - Class SimpleThread
@@ -73,6 +75,9 @@ Features implemented:
      - Type string value (None, bool, int, float, IP)
      - Numbers (int, float) and IP/network generator from string
  - Random: Get random strings (random length, generator, check for strong password, secure, urlsafe, ...)
+ - Json:
+     - Load invalid JSON
+     - Correct invalid JSON
 
 ## Requirements
 
@@ -100,7 +105,7 @@ import PythonToolsKit.Timeout
 
 ## Unittests
 
-For `GetType` module i use `doctest` (unittests in documentation) and `coverage`:
+For `GetType` and `Json` modules i use `doctest` (unittests in documentation) and `coverage`:
 
 ```bash
 python3 GetType.py             # run doctest with verbose mode
@@ -113,7 +118,7 @@ coverage html                  # Report in HTML page
 | Module       | Coverage  | Statements | missing    |
 |--------------|-----------|------------|------------|
 | GetType.py   | 100%      | 130        | 000        |
-|              |           |            |            |
+| Json.py      | 100%      | 46         | 000        |
 
 ## Links
 
@@ -140,6 +145,7 @@ coverage html                  # Report in HTML page
  - [Documentation GetFile](https://mauricelambert.github.io/info/python/code/PythonToolsKit/GetFile.html)
  - [Documentation GetType](https://mauricelambert.github.io/info/python/code/PythonToolsKit/GetType.html)
  - [Documentation Random](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Random.html)
+ - [Documentation Json](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Json.html)
  - [Pypi package](https://pypi.org/project/PythonToolsKit/)
 
 ## Licence

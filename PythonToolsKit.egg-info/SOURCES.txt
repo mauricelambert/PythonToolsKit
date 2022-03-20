@@ -11,6 +11,7 @@ PythonToolsKit/GetFile.py
 PythonToolsKit/GetPass.py
 PythonToolsKit/GetType.py
 PythonToolsKit/Import.py
+PythonToolsKit/Json.py
 PythonToolsKit/List.py
 PythonToolsKit/Logs.py
 PythonToolsKit/PrintF.py
@@ -20,6 +21,7 @@ PythonToolsKit/Report.py
 PythonToolsKit/ScapyTools.py
 PythonToolsKit/StringF.py
 PythonToolsKit/Terminal.py
+PythonToolsKit/TestArguments.py
 PythonToolsKit/TestTimeout.py
 PythonToolsKit/Thread.py
 PythonToolsKit/Timeout.py

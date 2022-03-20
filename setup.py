@@ -1,4 +1,4 @@
-import platform
+from platform import system
 import PythonToolsKit as package
 from subprocess import check_call, DEVNULL
 from setuptools import setup, find_packages
@@ -6,51 +6,34 @@ from setuptools.command.develop import develop
 from setuptools.command.install import install
 
 
+def set_terminal_registry():
+    if system() == "Windows":
+        from winreg import (
+            CreateKey,
+            OpenKey,
+            SetValueEx,
+            CloseKey,
+            HKEY_CURRENT_USER,
+            KEY_WRITE,
+            REG_DWORD,
+        )
+
+        PATH = "Console"
+        CreateKey(HKEY_CURRENT_USER, PATH)
+        key = OpenKey(HKEY_CURRENT_USER, PATH, 0, KEY_WRITE)
+        SetValueEx(key, "VirtualTerminalLevel", 0, REG_DWORD, 1)
+        CloseKey(key)
+
+
 class PostDevelopScript(develop):
     def run(self):
-
-        if platform.system() == "Windows":
-            check_call(
-                [
-                    r"C:\WINDOWS\system32\reg.exe",
-                    "add",
-                    r"HKEY_CURRENT_USER\Console",
-                    "/v",
-                    "VirtualTerminalLevel",
-                    "/t",
-                    "REG_DWORD",
-                    "/d",
-                    "0x00000001",
-                    "/f",
-                ],
-                stdout=DEVNULL,
-                stderr=DEVNULL,
-            )  # Active colors in console
-
+        set_terminal_registry()
         develop.run(self)
 
 
 class PostInstallScript(install):
     def run(self):
-
-        if platform.system() == "Windows":
-            check_call(
-                [
-                    r"C:\WINDOWS\system32\reg.exe",
-                    "add",
-                    r"HKEY_CURRENT_USER\Console",
-                    "/v",
-                    "VirtualTerminalLevel",
-                    "/t",
-                    "REG_DWORD",
-                    "/d",
-                    "0x00000001",
-                    "/f",
-                ],
-                stdout=DEVNULL,
-                stderr=DEVNULL,
-            )  # Active colors in console
-
+        set_terminal_registry()
         install.run(self)
 
 
@@ -90,6 +73,7 @@ setup(
         "Documentation GetFile": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/GetFile.html",
         "Documentation GetType": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/GetType.html",
         "Documentation Random": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/Random.html",
+        "Documentation Json": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/Json.html",
     },
     classifiers=[
         "Programming Language :: Python",

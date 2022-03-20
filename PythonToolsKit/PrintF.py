@@ -81,6 +81,7 @@ __all__ = ["printf", "STATES", "COLOR"]
 
 from sys import argv
 from typing import Union
+from platform import system
 
 STATES = {
     "OK": ("[+]", "\x1b[32m"),
@@ -93,6 +94,7 @@ STATES = {
 COLOR = "--no-color" not in argv
 
 states_get = STATES.get
+# END = "\n" if system() == "Windows" else ""
 
 
 def printf(

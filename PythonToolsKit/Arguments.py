@@ -30,6 +30,12 @@ This package implements tools to build python package and tools.
 _StoreAction(option_strings=['-i'], dest='i', nargs='?', const=<_io.TextIOWrapper name='<stdin>' mode='r' encoding='utf-8'>, default=None, type=FileType('r'), choices=None, help=None, metavar=None)
 >>> a.add_output_file("-o")
 _StoreAction(option_strings=['-o'], dest='o', nargs='?', const=None, default=<_io.TextIOWrapper name='<stdout>' mode='w' encoding='utf-8'>, type=FileType('w'), choices=None, help=None, metavar=None)
+>>> a.add_verbose()
+_StoreTrueAction(option_strings=['--verbose', '-v'], dest='verbose', nargs=0, const=True, default=False, type=None, choices=None, help='Active verbose mode.', metavar=None)
+>>> a.add_debug()
+_StoreTrueAction(option_strings=['--debug', '-d'], dest='debug', nargs=0, const=True, default=False, type=None, choices=None, help='Active debugging mode (set level debug for all loggers).', metavar=None)
+>>>
+
 >>> a = ArgumentParser(description="description")
 >>> a.add_password(password_args=["-a", "--api-key"], prompt_args=["-A", "--api-key-prompt"], prompt_function=input, prompt_function_args="API Key:", password_kwargs={"help": "Help message"}, prompt_kwargs={"help", "Help message"}, mutually_group_kwargs={"required", True})
 (<argparse._MutuallyExclusiveGroup object at 0x000001EC567EF730>, _StoreAction(option_strings=['-a', '--api-key'], dest='api_key', nargs=None, const=None, default=None, type=None, choices=None, help='Help message', metavar=None), _StoreAction(option_strings=['-A', '--api-key-prompt'], dest='api_key_prompt', nargs=None, const=None, default=None, type=None, choices=None, help='Help message', metavar=None))
@@ -37,10 +43,14 @@ _StoreAction(option_strings=['-o'], dest='o', nargs='?', const=None, default=<_i
 _StoreAction(option_strings=['-i', '--input'], dest='input', nargs='?', const=<_io.BufferedReader name='<stdin>'>, default=None, type=FileType('rb'), choices=None, help=None, metavar=None)
 >>> a.add_output_file("-o", "--output", file_args=["wb"], file_kwargs={"encoding": None}, help="Help message")
 _StoreAction(option_strings=['-o', '--output'], dest='output', nargs='?', const=None, default=<_io.BufferedWriter name='<stdout>'>, type=FileType('wb'), choices=None, help='Help message', metavar=None)
+>>> a.add_verbose('-V', '--VERBOSE-MODE', function = print, help="Verbose mode.")
+_StoreTrueAction(option_strings=['--VERBOSE-MODE', '-V'], dest='VERBOSE_MODE', nargs=0, const=True, default=False, type=None, choices=None, help='Verbose mode.', metavar=None)
+>>> a.add_debug('-D', '--DEBUG-MODE', help="Debug mode.")
+_StoreTrueAction(option_strings=['--DEBUG-MODE', '-d'], dest='DEBUG_MODE', nargs=0, const=True, default=False, type=None, choices=None, help='Debug mode', metavar=None)
 >>>
 """
 
-__version__ = "0.0.1"
+__version__ = "1.0.0"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -60,7 +70,7 @@ under certain conditions.
 __license__ = license
 __copyright__ = copyright
 
-__all__ = ["ArgumentParser"]
+__all__ = ["ArgumentParser", "verbose"]
 
 from argparse import (
     ArgumentParser as _ArgumentParser,
@@ -69,11 +79,49 @@ from argparse import (
     _StoreAction,
     _MutuallyExclusiveGroup,
 )
+from logging import getLogger, root, basicConfig, DEBUG
 from typing import List, Dict, Any, Tuple
 from collections.abc import Callable
 from sys import stdin, stdout
 from functools import partial
 from getpass import getpass
+from inspect import stack
+
+global verbose
+verbose = lambda *x: None  # default do nothing (mode verbose not active)
+vprint = partial(print, "[V]")
+
+
+def set_verbose(verbose_function: Callable = vprint) -> None:
+
+    """
+    This function sets verbose mode.
+    """
+
+    global verbose
+
+    module_caller_globals = stack()[
+        2
+    ].frame.f_globals  # 0: current, 1: parse_args, 2: call_parse_args
+
+    if module_caller_globals.get("verbose") is verbose:
+        module_caller_globals["verbose"] = verbose_function
+    else:
+        for key, value in module_caller_globals.items():
+            if value is verbose:
+                module_caller_globals[key] = verbose_function
+
+    verbose = verbose_function
+
+
+def set_debug() -> None:
+
+    """
+    This function sets log level for all loggers.
+    """
+
+    basicConfig(level=DEBUG)
+    [getLogger(name).setLevel(DEBUG) for name in root.manager.loggerDict]
 
 
 class ArgumentParser(_ArgumentParser):
@@ -82,7 +130,15 @@ class ArgumentParser(_ArgumentParser):
     argparse.ArgumentParser + preconfigured and commons arguments.
     """
 
-    _actions_ = {}
+    # _actions_ = {}
+
+    def __init__(self, *args, **kwargs):
+        super(self.__class__, self).__init__(*args, **kwargs)
+        self.password_prompt_destination = None
+        self.password_prompt_action = None
+        self.verbose_destination = None
+        self.debug_destination = None
+        self.verbose_function = vprint
 
     def add_password(
         self,
@@ -101,16 +157,16 @@ class ArgumentParser(_ArgumentParser):
         arguments.
         """
 
-        max_prompt = max(prompt_args, key=lambda x: len(x))
-        for arg in prompt_args:
-            self._actions_[arg] = (
-                max_prompt,
-                partial(
-                    prompt_function,
-                    *prompt_function_args,
-                    **prompt_function_kwargs,
-                ),
-            )
+        # max_prompt = max(prompt_args, key=lambda x: len(x))
+        # for arg in prompt_args:
+        #     self._actions_[arg] = (
+        #         max_prompt,
+        #         partial(
+        #             prompt_function,
+        #             *prompt_function_args,
+        #             **prompt_function_kwargs,
+        #         ),
+        #     )
 
         password = self.add_mutually_exclusive_group()
         password_add_argument = password.add_argument
@@ -123,6 +179,11 @@ class ArgumentParser(_ArgumentParser):
             *prompt_args,
             action="store_true",
             **password_kwargs,
+        )
+
+        self.password_prompt_destination = arg2.dest
+        self.password_prompt_action = partial(
+            prompt_function, *prompt_function_args, **prompt_function_kwargs
         )
 
         return password, arg1, arg2
@@ -201,6 +262,52 @@ class ArgumentParser(_ArgumentParser):
 
         return self.add_argument(*args, **kwargs2)
 
+    def add_verbose(
+        self, *args, function: Callable = vprint, **kwargs
+    ) -> _StoreAction:
+
+        """
+        This method adds verbose argument to the parser.
+        """
+
+        if not args:
+            args = ["--verbose", "-v"]
+
+        default_kwargs = {
+            "default": False,
+            "help": "Active verbose mode.",
+            "action": "store_true",
+        }
+
+        default_kwargs.update(kwargs)
+
+        argument = self.add_argument(*args, **default_kwargs)
+        self.verbose_destination = argument.dest
+
+        return argument
+
+    def add_debug(self, *args, **kwargs) -> _StoreAction:
+
+        """
+        This method adds debug argument to the parser.
+        """
+
+        if not args:
+            args = ["--debug", "-d"]
+
+        default_kwargs = {
+            "default": False,
+            "help": "Active debugging mode (set level debug for all loggers).",
+            "action": "store_true",
+        }
+
+        default_kwargs.update(kwargs)
+
+        argument = self.add_argument(*args, **default_kwargs)
+        self.debug_destination = argument.dest
+
+        return argument
+
     def parse_args(self, *args, **kwargs) -> Namespace:
 
         """
@@ -209,14 +316,37 @@ class ArgumentParser(_ArgumentParser):
 
         response = _ArgumentParser.parse_args(self, *args, **kwargs)
 
-        for arg, action in self._actions_.items():
+        password_prompt_destination = self.password_prompt_destination
+        verbose_destination = self.verbose_destination
+        debug_destination = self.debug_destination
 
-            attribut, function = action
-            attribut = attribut.lstrip("-").replace("-", "_")
-            arg = arg.lstrip("-").replace("-", "_")
+        if password_prompt_destination is not None and getattr(
+            self, password_prompt_destination, False
+        ):
+            setattr(
+                self,
+                password_prompt_destination,
+                self.password_prompt_action(),
+            )
 
-            if getattr(response, arg, False):
-                setattr(response, attribut, function())
+        if verbose_destination is not None and getattr(
+            response, verbose_destination, False
+        ):
+            set_verbose(self.verbose_function)
+
+        if debug_destination is not None and getattr(
+            response, debug_destination, False
+        ):
+            set_debug()
+
+        # for arg, action in self._actions_.items():
+
+        #     attribut, function = action
+        #     attribut = attribut.lstrip("-").replace("-", "_")
+        #     arg = arg.lstrip("-").replace("-", "_")
+
+        #     if getattr(response, arg, False):
+        #         setattr(response, attribut, function())
 
         return response
 
