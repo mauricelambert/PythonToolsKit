@@ -3,6 +3,7 @@ MANIFEST.in
 README.md
 setup.py
 PythonToolsKit/Arguments.py
+PythonToolsKit/Colors.py
 PythonToolsKit/Dict.py
 PythonToolsKit/DictObject.py
 PythonToolsKit/Encodings.py
@@ -26,6 +27,7 @@ PythonToolsKit/TestTimeout.py
 PythonToolsKit/Thread.py
 PythonToolsKit/Timeout.py
 PythonToolsKit/Tuple.py
+PythonToolsKit/WindowsTerminal.py
 PythonToolsKit/__init__.py
 PythonToolsKit/urlopen.py
 PythonToolsKit.egg-info/PKG-INFO

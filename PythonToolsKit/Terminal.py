@@ -23,7 +23,7 @@
 This package implements tools to build python package and tools.
 """
 
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -46,7 +46,7 @@ __copyright__ = copyright
 __all__ = ["Terminal"]
 
 from collections.abc import Callable
-from sys import stdout
+from sys import stdout, platform
 from enum import Enum
 
 stdout_write: Callable = stdout.write
@@ -253,6 +253,16 @@ class Terminal:
         """
         This function changes foreground color
         using the 8 bits mode.
+
+        2**3 == 8 -> RED
+        2**3 == 8 -> GREEN
+        2**2 == 4 -> BLUE
+
+        RRRGGGBB
+
+        (0b111 << 5) + (0b111 << 2) + 0b11
+
+        (7 << 5) + (7 << 2) + 3
         """
 
         if color > 255:
@@ -481,3 +491,10 @@ class Terminal:
 
         stdout_write(f"{char_ANSI}T")
         stdout_flush()
+
+
+if platform == "win32":
+
+    class Terminal(Terminal):
+
+        __doc__ = Terminal.__doc__

@@ -283,6 +283,7 @@ class ArgumentParser(_ArgumentParser):
 
         argument = self.add_argument(*args, **default_kwargs)
         self.verbose_destination = argument.dest
+        self.verbose_function = function
 
         return argument
 

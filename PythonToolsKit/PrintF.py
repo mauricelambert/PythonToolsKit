@@ -57,7 +57,7 @@ This package implements tools to build python package and tools.
 >>> 
 """
 
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -94,7 +94,7 @@ STATES = {
 COLOR = "--no-color" not in argv
 
 states_get = STATES.get
-# END = "\n" if system() == "Windows" else ""
+END = "\n" if system() == "Windows" else ""
 
 
 def printf(
@@ -151,4 +151,4 @@ def printf(
         else:
             to_print = f"\x1b[K{start}{show} {string}{end}{progress_bar}\x1b[F"
 
-    print(to_print, flush=True, **kwargs, end="")
+    print(to_print, flush=True, **kwargs, end=END)

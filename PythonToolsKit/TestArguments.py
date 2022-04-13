@@ -48,15 +48,15 @@
 # TEST 3
 ##########
 
-from Arguments import ArgumentParser
+# from Arguments import ArgumentParser
 
-a = ArgumentParser()
-a.add_verbose()
-a.add_debug()
-a.parse_args(["--debug", "--verbose"])
+# a = ArgumentParser()
+# a.add_verbose()
+# a.add_debug()
+# a.parse_args(["--debug", "--verbose"])
 
-from Arguments import verbose
+# from Arguments import verbose
 
-verbose("This line is printed.")
+# verbose("This line is printed.")
 
-exit()
+# exit()

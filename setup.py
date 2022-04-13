@@ -74,6 +74,8 @@ setup(
         "Documentation GetType": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/GetType.html",
         "Documentation Random": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/Random.html",
         "Documentation Json": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/Json.html",
+        "Documentation WindowsTerminal": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/WindowsTerminal.html",
+        "Documentation Colors": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/Colors.html",
     },
     classifiers=[
         "Programming Language :: Python",

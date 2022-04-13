@@ -31,6 +31,7 @@ Features implemented:
  - Encodings:
      - Generator to obtain probable encodings
      - Function to try to decode the data with probable encodings
+     - Fast Base64 functions (without types/regex checks)
  - DictObject:
      - Dynamic object (build from dict)
      - JsonDeserializer
@@ -78,6 +79,13 @@ Features implemented:
  - Json:
      - Load invalid JSON
      - Correct invalid JSON
+ - WindowsTerminal:
+     - Activate/desactivate temporary/persistent virtual terminal (colors, font, ...) on Windows
+     - Set temporary/persistent terminal transparency on Windows
+ - Colors:
+     - Build 8bits-color byte
+     - Get 3 bytes color from HTML/CSS colors (#HEX, rgb function and rgba function)
+     - Check and safe methods are available for all these features
 
 ## Requirements
 
@@ -105,7 +113,7 @@ import PythonToolsKit.Timeout
 
 ## Unittests
 
-For `GetType` and `Json` modules i use `doctest` (unittests in documentation) and `coverage`:
+For `GetType` and `Json`, `Encodings`, `Colors` and `WindowsTerminal` modules i use `doctest` (unittests in documentation) and `coverage`:
 
 ```bash
 python3 GetType.py             # run doctest with verbose mode
@@ -115,10 +123,13 @@ coverage report                # Report in console
 coverage html                  # Report in HTML page
 ```
 
-| Module       | Coverage  | Statements | missing    |
-|--------------|-----------|------------|------------|
-| GetType.py   | 100%      | 130        | 000        |
-| Json.py      | 100%      | 46         | 000        |
+| Module             | Coverage  | Statements | missing    |
+|--------------------|-----------|------------|------------|
+| GetType.py         | 100%      | 130        | 000        |
+| Json.py            | 100%      | 46         | 000        |
+| Encodings.py       | 100%      | 54         | 000        |
+| WindowsTerminal.py | 94%       | 96         | 006        |
+| Colors.py          | 100%      | 176        | 000        |
 
 ## Links
 
@@ -146,6 +157,8 @@ coverage html                  # Report in HTML page
  - [Documentation GetType](https://mauricelambert.github.io/info/python/code/PythonToolsKit/GetType.html)
  - [Documentation Random](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Random.html)
  - [Documentation Json](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Json.html)
+ - [Documentation WindowsVirtualTerminal](https://mauricelambert.github.io/info/python/code/PythonToolsKit/WindowsVirtualTerminal.html)
+ - [Documentation Colors](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Colors.html)
  - [Pypi package](https://pypi.org/project/PythonToolsKit/)
 
 ## Licence
