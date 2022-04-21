@@ -22,42 +22,52 @@
 r"""
 This package implements tools to build python package and tools.
 
->>> from PrintF import printf
->>> printf('My message')
-[+] My message
->>> printf("My message", state="NOK")
-[-] My message
->>> printf("My message", colored=False, state="ERROR")
-[!] My message
->>> printf("My message", end="\n\n", state="INFO")
-[*] My message
+>>> from PrintF import printf, ProgressBar
+>>> printf("It's working !")
+[+] It's working !
+>>> printf("Is not working...", state="NOK")
+[-] Is not working...
+>>> printf("Oh no ! An exception is raised...", state="ERROR")
+[!] Oh no ! An exception is raised...
+>>> printf("It's running !", end="\n\n", state="INFO")
+[*] It's running !
 
->>> printf("My message", start="\n", state="TODO")
+>>> printf("Please press enter to start the program...", start="\n", state="TODO")
 
-[#] My message
->>> printf("My message", pourcent=20, state="ASK") or print("\n")
-[?] My message
+[#] Please press enter to start the program...
+>>> printf("Do you want to continue ?", pourcent=20, state="ASK"); print()
+[?] Do you want to continue ?
 [?] 20% |████                |
->>> printf("My message", pourcent=20) or printf("My message", pourcent=55) or print("\n")
-[+] My message
+>>> printf("Step 1 OK", pourcent=20); printf("Step 2 OK", pourcent=55); print()
+[+] Step 1 OK
+[+] Step 2 OK
 [+] 55% |███████████         |
->>> printf("My message", pourcent=20) or print() or printf("My message", pourcent=55) or print("\n")
-[+] My message
-[+] My message
+>>> printf("Step 1 OK", pourcent=20); print(); printf("Step 2 OK", pourcent=55); print()
+[+] Step 1 OK
+[+] 20% |████                |
+[+] Step 2 OK
 [+] 55% |███████████         |
->>> printf("My message", add_progressbar=False, pourcent=55) or print("\n")
-[+] My message
+>>> printf("Step 2 OK", add_progressbar=False, pourcent=55); print()
+[+] Step 2 OK
 [+] 55%
->>> printf("My message", oneline_progress=True, pourcent=55) or print()
-[+] My message 55% |███████████         |
+>>> printf("Step 2 OK", oneline_progress=True, add_progressbar=False, pourcent=55); print()
+[+] Step 2 OK 55%
+>>> printf("Step 2 OK", oneline_progress=True, pourcent=55); print()
+[+] Step 2 OK 55% |███████████         |
 >>> import PrintF
 >>> PrintF.STATES["TEST"] = ("[T]", "\x1b[37m")
->>> printf("My OK message", state="TEST")
-[T] My OK message
->>> 
+>>> printf("Testing a custom state...", state="TEST")
+[T] Testing a custom state...
+>>> printf("Unknown", state="unknown")
+[ ] Unknown
+>>> custom_progress = ProgressBar("[", "]", "#", "-", 30)
+>>> printf("Step 1 OK", progressbar=custom_progress, pourcent=20); print()
+[+] Step 1 OK
+[+] 20% [######------------------------]
+>>>
 """
 
-__version__ = "0.0.4"
+__version__ = "1.0.0"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -77,11 +87,22 @@ under certain conditions.
 __license__ = license
 __copyright__ = copyright
 
-__all__ = ["printf", "STATES", "COLOR"]
+__all__ = ["printf", "STATES"]
 
 from sys import argv
 from typing import Union
 from platform import system
+from dataclasses import dataclass
+
+
+@dataclass
+class ProgressBar:
+    start: str = "|"
+    end: str = "|"
+    character: str = "\u2588"
+    empty: str = " "
+    size: int = 20
+
 
 STATES = {
     "OK": ("[+]", "\x1b[32m"),
@@ -91,64 +112,55 @@ STATES = {
     "TODO": ("[#]", "\x1b[35m"),
     "ASK": ("[?]", "\x1b[36m"),
 }
-COLOR = "--no-color" not in argv
 
 states_get = STATES.get
-END = "\n" if system() == "Windows" else ""
 
 
 def printf(
     string: str,
     state: str = "OK",
-    colored: bool = COLOR,
-    pourcent: Union[int, str] = None,
+    pourcent: int = None,
     start: str = "",
     end: str = "\n",
+    progressbar: ProgressBar = ProgressBar,
     add_progressbar: bool = True,
     oneline_progress: bool = False,
     **kwargs,
 ) -> None:
 
     """
-    This function prints colored information.
+    This function prints formatted and colored information and progression.
     """
 
-    show, color = states_get(state)
+    show, color = states_get(state) or ("[ ]", "\x1b[39m")
 
-    if state is None:
-        raise ValueError("Invalid state, state should be a key of STATES...")
+    progress_bar = ""
+    has_pourcent = pourcent is not None
 
-    if pourcent is not None:
+    if has_pourcent and add_progressbar:
+        max_size = progressbar.size
+        char_size = 100 / max_size
+        pourcent_size = round(pourcent / char_size)
+        if pourcent_size > max_size:
+            pourcent_size = max_size
+        progress_bar = (
+            progressbar.start
+            + (progressbar.character * pourcent_size)
+            + (progressbar.empty * (max_size - pourcent_size))
+            + progressbar.end
+        )
 
-        if oneline_progress:
-            progress_bar = f"{pourcent}%"
-        else:
-            progress_bar = f"{color}{show} {pourcent}%"
+    if has_pourcent:
+        progress_bar = f"{pourcent}% {progress_bar}\x1b[0m{end}\x1b[F"
+        if not oneline_progress:
+            progress_bar = f"{color}{show} {progress_bar}"
 
-        if add_progressbar:
-            char = "\u2588"
-            progress_state = int(pourcent) // 5
-            progress_bar += (
-                f" |{char * progress_state}{' ' * (20 - progress_state)}|"
-            )
+    if oneline_progress:
+        to_print = f"\x1b[K{start}{color}{show} {string} {progress_bar}"
     else:
-        progress_bar = ""
+        to_print = (
+            f"\x1b[K{start}{color}{show} {string}\x1b[0m{end}"
+            f"{progress_bar}"
+        )
 
-    if colored:
-        if oneline_progress:
-            to_print = (
-                f"\x1b[K{start}{color}{show} {string} {progress_bar}"
-                f"\x1b[0m{end}\x1b[F"
-            )
-        else:
-            to_print = (
-                f"\x1b[K{start}{color}{show} {string}\x1b[0m{end}"
-                f"{progress_bar}\x1b[0m\x1b[F"
-            )
-    else:
-        if oneline_progress:
-            to_print = f"\x1b[K{start}{show} {string}{progress_bar}{end}\x1b[F"
-        else:
-            to_print = f"\x1b[K{start}{show} {string}{end}{progress_bar}\x1b[F"
-
-    print(to_print, flush=True, **kwargs, end=END)
+    print(to_print, flush=True, end="", **kwargs)
