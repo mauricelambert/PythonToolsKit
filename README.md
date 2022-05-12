@@ -86,6 +86,40 @@ Features implemented:
      - Build 8bits-color byte
      - Get 3 bytes color from HTML/CSS colors (#HEX, rgb function and rgba function)
      - Check and safe methods are available for all these features
+ - DataAnalysis:
+     - Data statistics
+         - frequences (pourcent)
+             - Keys
+             - Values
+             - Keys and values
+             - Keys and values counters
+         - averages
+         - variances
+         - deviations
+         - medians
+         - sum
+         - max
+         - min
+     - Data filtering
+     - Counter/getter
+         - Count/get values greater than
+         - Count/get values lesser than
+         - Count value equal to
+         - Count different values by key
+     - Sort
+         - Values
+         - Keys
+         - Values counters
+         - Values sum
+     - Generate chart (using matplotlib)
+         - statistictypes
+         - valuetypes (values)
+         - valuetypes (counters)
+     - Print data tables
+         - statistictypes
+         - dictionnaries
+         - valuetypes
+     - Group data by values
 
 ## Requirements
 
@@ -130,6 +164,7 @@ coverage html                  # Report in HTML page
 | Encodings.py       | 100%      | 54         | 000        |
 | WindowsTerminal.py | 94%       | 96         | 006        |
 | Colors.py          | 100%      | 176        | 000        |
+| DataAnalysis.py    | 100%      | 290        | 000        |
 
 ## Links
 
@@ -159,6 +194,7 @@ coverage html                  # Report in HTML page
  - [Documentation Json](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Json.html)
  - [Documentation WindowsTerminal](https://mauricelambert.github.io/info/python/code/PythonToolsKit/WindowsTerminal.html)
  - [Documentation Colors](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Colors.html)
+ - [Documentation DataAnalysis](https://mauricelambert.github.io/info/python/code/PythonToolsKit/DataAnalysis.html)
  - [Pypi package](https://pypi.org/project/PythonToolsKit/)
 
 ## Licence

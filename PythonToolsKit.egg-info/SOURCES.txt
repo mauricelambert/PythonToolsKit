@@ -4,6 +4,7 @@ README.md
 setup.py
 PythonToolsKit/Arguments.py
 PythonToolsKit/Colors.py
+PythonToolsKit/DataAnalysis.py
 PythonToolsKit/Dict.py
 PythonToolsKit/DictObject.py
 PythonToolsKit/Encodings.py

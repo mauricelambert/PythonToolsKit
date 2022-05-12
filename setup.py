@@ -76,6 +76,7 @@ setup(
         "Documentation Json": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/Json.html",
         "Documentation WindowsTerminal": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/WindowsTerminal.html",
         "Documentation Colors": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/Colors.html",
+        "Documentation DataAnalysis": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/DataAnalysis.html",
     },
     classifiers=[
         "Programming Language :: Python",
@@ -114,6 +115,7 @@ setup(
         "Tuple",
         "Dict",
         "Function",
+        "Statistic",
     ],
     platforms=["Windows", "Linux", "MacOS"],
     license=package.__license__,
