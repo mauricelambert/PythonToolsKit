@@ -82,7 +82,7 @@ from urllib.request import (
     HTTPSHandler,
 )
 from http.client import HTTPResponse, HTTPMessage
-from collections import Callable, Sequence
+from collections.abc import Callable, Sequence
 from http import client as httpclient
 from urllib.error import HTTPError
 from typing import Dict, Any

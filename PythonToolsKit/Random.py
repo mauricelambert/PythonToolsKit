@@ -90,8 +90,8 @@ from string import (
 )
 from secrets import token_urlsafe, choice as secret_choice, randbelow
 from typing import List, Tuple, Union
+from collections.abc import Callable
 from random import randint, choices
-from collections import Callable
 
 
 def get_number_function(
