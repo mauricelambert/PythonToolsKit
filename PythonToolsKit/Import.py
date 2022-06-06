@@ -23,9 +23,10 @@
 This package implements tools to build python package and tools.
 
 >>> test = import_from_filename("./test.py")
+>>> test = reload(test)
 """
 
-__version__ = "0.0.1"
+__version__ = "0.1.0"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -45,12 +46,21 @@ under certain conditions.
 __license__ = license
 __copyright__ = copyright
 
-__all__ = ["import_from_filename"]
+__all__ = ["import_from_filename", "reload"]
 
 from importlib.util import spec_from_file_location, module_from_spec
 from os.path import basename, splitext
+from importlib._bootstrap import _exec
 from types import ModuleType
 
+
+def reload(module: ModuleType) -> ModuleType:
+
+    """
+    This function reload a module.
+    """
+
+    return _exec(module.__spec__, module)
 
 def import_from_filename(filename: str) -> ModuleType:
 
@@ -60,6 +70,7 @@ def import_from_filename(filename: str) -> ModuleType:
 
     spec = spec_from_file_location(splitext(basename(filename))[0], filename)
     module = module_from_spec(spec)
+    module.__spec__ = spec
     spec.loader.exec_module(module)
 
     return module

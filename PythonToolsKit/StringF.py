@@ -23,7 +23,7 @@
 This package implements tools to build python package and tools.
 
 >>> string_lengthformat("azerty")
-'azerty,       '
+'azerty       ,'
 >>> string_lengthformat("azertyazertyazerty")
 'azertyazer...,'
 >>> print(strings_tableformat([(0, 1), ("a" * 50, "b" * 50)]))
@@ -32,7 +32,11 @@ This package implements tools to build python package and tools.
 >>> print(strings_tableformat([(0, 1), ("a" * 50, "b" * 50)], length=[13, 26]))
 |0            |1                         |
 |aaaaaaaaaa...|bbbbbbbbbbbbbbbbbbbbbbb...|
->>> print(strings_tableformat([(0, 1), ("a" * 50, "b" * 50)], length=[13, 26]))
+>>> print(strings_tableformat([["a" * 5, "b" * 25]] * 2, length=[5, 25], columns=["1" * 5, "2" * 25]))
+|11111|2222222222222222222222222|
+|-----|-------------------------|
+|aaaaa|bbbbbbbbbbbbbbbbbbbbbbbbb|
+|aaaaa|bbbbbbbbbbbbbbbbbbbbbbbbb|
 >>> class A:
 ...     def __init__(self):
 ...             self.a = "a"
@@ -50,9 +54,30 @@ A
 |b            |b            |
 |azerty       |1.1          |
 >>>
+
+Run tests:
+ ~# python -m doctest StringF.py
+ ~# python StringF.py            # Verbose mode
+
+3 items passed all tests:
+   9 tests in __main__
+   2 tests in __main__.string_lengthformat
+   3 tests in __main__.strings_tableformat
+14 tests in 6 items.
+14 passed and 0 failed.
+Test passed.
+
+~# coverage run StringF.py
+~# coverage report
+Name         Stmts   Miss  Cover
+--------------------------------
+StringF.py      67      0   100%
+--------------------------------
+TOTAL           67      0   100%
+~#
 """
 
-__version__ = "0.0.1"
+__version__ = "0.1.0"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -84,6 +109,12 @@ def string_lengthformat(
 
     """
     This function formats string length.
+
+    >>> string_lengthformat("azerty")
+    'azerty       ,'
+    >>> string_lengthformat("azertyazertyazerty")
+    'azertyazer...,'
+    >>>
     """
 
     if not isinstance(string, str):
@@ -109,6 +140,19 @@ def strings_tableformat(
 
     """
     This function returns a formatted table of strings.
+
+    >>> print(strings_tableformat([(0, 1), ("a" * 50, "b" * 50)]))
+    |0            |1            |
+    |aaaaaaaaaa...|bbbbbbbbbb...|
+    >>> print(strings_tableformat([(0, 1), ("a" * 50, "b" * 50)], length=[13, 26]))
+    |0            |1                         |
+    |aaaaaaaaaa...|bbbbbbbbbbbbbbbbbbbbbbb...|
+    >>> print(strings_tableformat([["a" * 5, "b" * 25]] * 2, length=[5, 25], columns=["1" * 5, "2" * 25]))
+    |11111|2222222222222222222222222|
+    |-----|-------------------------|
+    |aaaaa|bbbbbbbbbbbbbbbbbbbbbbbbb|
+    |aaaaa|bbbbbbbbbbbbbbbbbbbbbbbbb|
+    >>>
     """
 
     table = []
@@ -135,14 +179,12 @@ def strings_tableformat(
         second_line = [separator]
 
         for string in columns:
+            size = get_length()
             first_line.append(
-                string_lengthformat(string, get_length(), end, separator)
+                string_lengthformat(string, size, end, separator)
             )
-            second_length = get_length()
             second_line.append(
-                string_lengthformat(
-                    "-" * second_length, second_length, end, separator
-                )
+                string_lengthformat("-" * size, size, end, separator)
             )
 
         table.append(first_line)
@@ -195,3 +237,9 @@ class Object_StringF:
             )
             string += ")"
         return string
+
+
+if __name__ == "__main__":
+    import doctest
+
+    doctest.testmod(verbose=True)

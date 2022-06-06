@@ -19,7 +19,7 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ###################
 
-"""
+r"""
 This package implements tools to build python package and tools.
 
 >>> from Report import *
@@ -47,10 +47,8 @@ This package implements tools to build python package and tools.
         "id": 1
     }
 ]
->>> print(r.report_CSV())
-test2,2,2
-test1,10,1
-
+>>> r.report_CSV()
+'name,level,id\r\ntest2,2,2\r\ntest1,10,1\r\n'
 >>> print(r.report_HTML())
 <table><thead><tr><th>name</th><th>level</th><th>id</th></tr></thead><tbody><tr><td>test2</td><td>2</td><td>2</td></tr><tr><td>test1</td><td>10</td><td>1</td></tr></tbody><tfoot></tfoot></table>
 >>> r.statistic()
@@ -61,10 +59,47 @@ test1,10,1
 |--------------------------|--------------------------|--------------------------|--------------------------|--------------------------|--------------------------|--------------------------|--------------------------|--------------------------|--------------------------|--------------------------|--------------------------|--------------------------|--------------------------|--------------------------|--------------------------|--------------------------|--------------------------|--------------------------|
 |level                     |12                        |10                        |2                         |2                         |1                         |1                         |6.0                       |32                        |6.0                       |4.0                       |1                         |1                         |0                         |2                         |1                         |1                         |1                         |1                         |
 |id                        |3                         |2                         |1                         |2                         |1                         |1                         |1.5                       |0.5                       |1.5                       |0.5                       |1                         |1                         |2                         |0                         |1                         |1                         |2                         |0                         |
+>>> from dataclasses import dataclass
+>>> @dataclass
+... class Test:
+...     one: int = 1
+...     two: int = 2
+...
+>>> data = [Test(), Test(one=2, two=2)]
+>>> r = Report(data)
+>>> r.frequence()
+>>> r = Report(data, filter_value=lambda x: x["one"] == 1)
+>>> r.frequence()
+50.0
+>>> r = Report(data, filter_value=lambda x: x["two"] == 1)
+>>> r.report_text()
+>>> r.report_HTML()
+>>> r.report_JSON()
+>>> r.report_CSV()
+>>> r.statistic()
 >>>
+
+Run tests:
+ ~# python -m doctest Report.py
+ ~# python Report.py            # Verbose mode
+
+1 items passed all tests:
+  23 tests in __main__
+23 tests in 12 items.
+23 passed and 0 failed.
+Test passed.
+
+~# coverage run Report.py
+~# coverage report
+Name         Stmts   Miss  Cover
+--------------------------------
+Report.py      160      1    99%
+--------------------------------
+TOTAL          160      1    99%
+~#
 """
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -129,6 +164,11 @@ def customfilter(
 
 
 class Report:
+
+    """
+    This function reports data in different formats.
+    """
+
     def __init__(
         self,
         objects: Union[Sequence[dict], Sequence[object]],
@@ -289,9 +329,7 @@ class Report:
         fieldnames = objects[0].keys()
 
         report = StringIO()
-        csv_report = DictWriter(
-            report, dialect="unix", fieldnames=fieldnames, *args, **kwargs
-        )
+        csv_report = DictWriter(report, fieldnames=fieldnames, *args, **kwargs)
         csv_report.writeheader()
         csv_report.writerows(objects)
         return report.getvalue()
@@ -378,3 +416,9 @@ class Report:
             statistic["CountLessThanDeviation"] = lt_deviation
 
         return statistics
+
+
+if __name__ == "__main__":
+    import doctest
+
+    doctest.testmod(verbose=True)

@@ -165,6 +165,8 @@ coverage html                  # Report in HTML page
 | WindowsTerminal.py | 94%       | 96         | 006        |
 | Colors.py          | 100%      | 176        | 000        |
 | DataAnalysis.py    | 100%      | 290        | 000        |
+| Report.py          | 99%       | 160        | 001        |
+| StringF.py         | 100%      | 67         | 000        |
 
 ## Links
 

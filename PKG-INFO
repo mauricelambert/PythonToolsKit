@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: PythonToolsKit
-Version: 1.1.2
+Version: 1.1.3
 Summary: This package implements tools to build python package and tools.
 Home-page: https://github.com/mauricelambert/PythonToolsKit
 Author: Maurice Lambert
@@ -216,6 +216,8 @@ coverage html                  # Report in HTML page
 | WindowsTerminal.py | 94%       | 96         | 006        |
 | Colors.py          | 100%      | 176        | 000        |
 | DataAnalysis.py    | 100%      | 290        | 000        |
+| Report.py          | 99%       | 160        | 001        |
+| StringF.py         | 100%      | 67         | 000        |
 
 ## Links
 
