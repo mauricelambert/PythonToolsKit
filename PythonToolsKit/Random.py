@@ -40,9 +40,9 @@ This package implements tools to build python package and tools.
 >>> get_random_strings((2, 7), 2, separator="\x00", secure=True)
 'nc/A5Y&\x00)}GlbmH:u}'
 >>> get_random_strings((2, 7), (2, 4), separator="\x00", secure=True, urlsafe=True)
-'n3HlX_dP5UpOuA\x00Nv_tdoJjdcBRGA\x00bPZuDzmeqA\x00fFrbCxmCq5rOpXM'
+'t6G-XMTj\x00W4TPBF9CyB\x00WD67JTBx4IX\x00ytdusWFeA\x00Bgb3voZ'
 >>> get_random_strings((2, 7), (2, 4), separator="\x00", secure=True, urlsafe=True, characters="abc")
-'Maf7jFx6Rlc\x00yZeGaGkXkyI\x00Zs58Qzq26Ljv\x00wLztvfoC6GOL'
+'6r0zGut-0ph\x00w~Ab9CJuH\x00IkKxIIdRcF\x0077Fu4uRVXd\x00HrEhT2XY'
 >>> get_random_strings((2, 7), (2, 4), separator=" ; ", secure=True, characters="abc")
 'babccbaaab ; babaacaba ; aacabcc ; abaacabc'
 >>> get_random_strings((2, 7), (2, 4), separator=" ; ", secure=True, letters=True)
@@ -58,7 +58,7 @@ This package implements tools to build python package and tools.
 >>>
 """
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -88,7 +88,7 @@ from string import (
     ascii_uppercase,
     punctuation,
 )
-from secrets import token_urlsafe, choice as secret_choice, randbelow
+from secrets import choice as secret_choice, randbelow
 from typing import List, Tuple, Union
 from collections.abc import Callable
 from random import randint, choices
@@ -133,6 +133,8 @@ def get_random_strings(
         chars = ascii_letters
     elif alphanumeric:
         chars = ascii_letters + digits
+    elif urlsafe:
+        chars = ascii_letters + digits + "-./_~"
     elif ascii:
         chars = bytes(range(127)).decode("ascii")
     elif latin1:
@@ -149,9 +151,6 @@ def get_random_strings(
         )
     else:
         get_random_chars = lambda x: "".join(choices(chars, k=x))
-
-    if urlsafe:
-        get_random_chars = token_urlsafe
 
     if numbers == 1:
         random_strings = get_random_chars(get_length())
