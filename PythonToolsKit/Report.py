@@ -77,6 +77,33 @@ This package implements tools to build python package and tools.
 >>> r.report_JSON()
 >>> r.report_CSV()
 >>> r.statistic()
+>>> r = ReportDict({"Debian": 5026, "Windows": 2548, "Red Hat": 3609, "FreeBSD": 92})
+>>> print(r.report_text())
+|keys   |values |
+|-------|-------|
+|Debian |5026   |
+|Windows|2548   |
+|Red Hat|3609   |
+|FreeBSD|92     |
+>>> r.report_CSV()
+'keys,values\r\nDebian,5026\r\nWindows,2548\r\nRed Hat,3609\r\nFreeBSD,92\r\n'
+>>> r.report_HTML()
+'<table><thead><tr><th>keys</th><th>values</th></tr></thead><tbody><tr><td>Debian</td><td>5026</td></tr><tr><td>Windows</td><td>2548</td></tr><tr><td>Red Hat</td><td>3609</td></tr><tr><td>FreeBSD</td><td>92</td></tr></tbody><tfoot></tfoot></table>'
+>>> print(r.report_JSON())
+{
+    "Debian": 5026,
+    "Windows": 2548,
+    "Red Hat": 3609,
+    "FreeBSD": 92
+}
+>>> r = ReportDict({"Debian": 5026, "Windows": 2548, "Red Hat": 3609, "FreeBSD": 92}, columns=("my column 1", "my column 2"))
+>>> print(r.report_text())
+|my column 1 |my column 2 |
+|------------|------------|
+|Debian      |5026        |
+|Windows     |2548        |
+|Red Hat     |3609        |
+|FreeBSD     |92          |
 >>>
 
 Run tests:
@@ -84,22 +111,22 @@ Run tests:
  ~# python Report.py            # Verbose mode
 
 1 items passed all tests:
-  23 tests in __main__
-23 tests in 12 items.
-23 passed and 0 failed.
+  30 tests in __main__
+30 tests in 18 items.
+30 passed and 0 failed.
 Test passed.
 
 ~# coverage run Report.py
 ~# coverage report
 Name         Stmts   Miss  Cover
 --------------------------------
-Report.py      160      1    99%
+Report.py      193      1    99%
 --------------------------------
-TOTAL          160      1    99%
+TOTAL          193      1    99%
 ~#
 """
 
-__version__ = "0.0.2"
+__version__ = "0.1.0"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -119,13 +146,13 @@ under certain conditions.
 __license__ = license
 __copyright__ = copyright
 
-__all__ = ["Report"]
+__all__ = ["Report", "ReportDict"]
 
 from typing import Any, Sequence, Union, List, Dict, Tuple
 from statistics import fmean, median, pstdev, variance
 from collections.abc import Callable, Iterator
+from csv import DictWriter, writer
 from functools import partial
-from csv import DictWriter
 from io import StringIO
 from json import dumps
 
@@ -163,10 +190,96 @@ def customfilter(
     return new_data, filtered
 
 
+class ReportDict:
+
+    """
+    This class reports dict in different formats.
+    """
+
+    def __init__(
+        self,
+        data: Union[dict, object],
+        columns: Tuple[str] = ("keys", "values"),
+    ):
+        self.data = next(Report.get_dicts((data,)))
+        self.columns = columns
+
+    def report_text(self) -> str:
+
+        """
+        This function reports dict as text (Makdown).
+        """
+
+        data = self.data
+        key, value = columns = self.columns
+        keys = list(data.keys())
+        values = list(data.values())
+        max_str = lambda x: max(len(str(y)) for y in x)
+
+        max_keys = max_str(keys)
+        max_values = max_str(values)
+
+        value_length = len(value) + 1
+        if max_values < value_length:
+            max_values = value_length
+
+        key_length = len(key) + 1
+        if max_keys < key_length:
+            max_keys = key_length
+
+        return strings_tableformat(
+            zip(keys, values),
+            columns=self.columns,
+            length=(max_keys, max_values),
+        )
+
+    def report_CSV(self, *args, **kwargs) -> str:
+
+        """
+        This function reports dict as CSV.
+
+        *args and **kwargs are optional arguments for csv.writer
+        """
+
+        report = StringIO()
+        csv_report = writer(report, *args, **kwargs)
+        csv_report.writerow(self.columns)
+        csv_report.writerows(self.data.items())
+        return report.getvalue()
+
+    def report_HTML(self) -> str:
+
+        """
+        This function reports dict as HTML.
+        """
+
+        html = (
+            "<table><thead><tr><th>"
+            + "</th><th>".join(self.columns)
+            + "</th></tr></thead>"
+        )
+
+        html += "<tbody>"
+        for key, value in self.data.items():
+            html += (
+                "<tr><td>" + str(key) + "</td><td>" + str(value) + "</td></tr>"
+            )
+
+        return html + "</tbody><tfoot></tfoot></table>"
+
+    def report_JSON(self, *args, indent=4, **kwargs) -> str:
+
+        """
+        This function reports dict as JSON.
+        """
+
+        return dumps(self.data, *args, indent=indent, **kwargs)
+
+
 class Report:
 
     """
-    This function reports data in different formats.
+    This class reports data in different formats.
     """
 
     def __init__(
@@ -279,7 +392,7 @@ class Report:
 
         columns = (
             "<thead><tr><th>"
-            + "</th><th>".join([str(k) for k in objects[0].keys()])
+            + "</th><th>".join(str(k) for k in objects[0].keys())
             + "</th></tr></thead>"
         )
 
@@ -287,7 +400,7 @@ class Report:
         body = "<tbody><tr><td>"
 
         for i, object_ in enumerate(objects):
-            body += "</td><td>".join([str(v) for v in object_.values()])
+            body += "</td><td>".join(str(v) for v in object_.values())
             body += f"</td></tr>{'<tr><td>' if i != last_index else ''}"
 
         body += "</tbody><tfoot></tfoot>"
