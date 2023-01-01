@@ -36,6 +36,8 @@ Project-URL: Documentation Json, https://mauricelambert.github.io/info/python/co
 Project-URL: Documentation WindowsTerminal, https://mauricelambert.github.io/info/python/code/PythonToolsKit/WindowsTerminal.html
 Project-URL: Documentation Colors, https://mauricelambert.github.io/info/python/code/PythonToolsKit/Colors.html
 Project-URL: Documentation DataAnalysis, https://mauricelambert.github.io/info/python/code/PythonToolsKit/DataAnalysis.html
+Project-URL: Documentation RecursionDebug, https://mauricelambert.github.io/info/python/code/PythonToolsKit/RecursionDebug.html
+Project-URL: Documentation OrdDict, https://mauricelambert.github.io/info/python/code/PythonToolsKit/OrdDict.html
 Description: ![PythonToolsKit logo](https://mauricelambert.github.io/info/python/code/PythonToolsKit/logo_small.png "PythonToolsKit logo")
         
         # PythonToolsKit

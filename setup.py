@@ -77,6 +77,8 @@ setup(
         "Documentation WindowsTerminal": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/WindowsTerminal.html",
         "Documentation Colors": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/Colors.html",
         "Documentation DataAnalysis": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/DataAnalysis.html",
+        "Documentation RecursionDebug": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/RecursionDebug.html",
+        "Documentation OrdDict": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/OrdDict.html",
     },
     classifiers=[
         "Programming Language :: Python",
