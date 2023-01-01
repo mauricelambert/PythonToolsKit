@@ -120,6 +120,8 @@ Features implemented:
          - dictionnaries
          - valuetypes
      - Group data by values
+ - RecursionDebug: Help you to debug RecursionError
+ - OrdDict: A fast and powerful *Ordered Dict*
 
 ## Requirements
 
@@ -127,6 +129,9 @@ This package require:
 
  - python3
  - python3 Standard Library
+ 
+> To use `PythonToolsKit.ScapyTools` you need `Scapy`, but is not installed by default (because this is the only module that needs it), install it with `python3 -m pip install scapy`
+>> To use `PythonToolsKit.DataAnalysis.show_chart` you need `matplotlib`, but is not installed by default (because this is the only function that needs it), install it with `python3 -m pip install matplotlib`
 
 ## Installation
 
@@ -167,6 +172,7 @@ coverage html                  # Report in HTML page
 | DataAnalysis.py    | 100%      | 290        | 000        |
 | Report.py          | 99%       | 160        | 001        |
 | StringF.py         | 100%      | 67         | 000        |
+| OrdDict.py         | 100%      | 172        | 000        |
 
 ## Links
 
@@ -197,6 +203,8 @@ coverage html                  # Report in HTML page
  - [Documentation WindowsTerminal](https://mauricelambert.github.io/info/python/code/PythonToolsKit/WindowsTerminal.html)
  - [Documentation Colors](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Colors.html)
  - [Documentation DataAnalysis](https://mauricelambert.github.io/info/python/code/PythonToolsKit/DataAnalysis.html)
+ - [Documentation RecursionDebug](https://mauricelambert.github.io/info/python/code/PythonToolsKit/RecursionDebug.html)
+ - [Documentation OrdDict](https://mauricelambert.github.io/info/python/code/PythonToolsKit/OrdDict.html)
  - [Pypi package](https://pypi.org/project/PythonToolsKit/)
 
 ## Licence

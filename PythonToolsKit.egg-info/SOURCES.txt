@@ -16,9 +16,11 @@ PythonToolsKit/Import.py
 PythonToolsKit/Json.py
 PythonToolsKit/List.py
 PythonToolsKit/Logs.py
+PythonToolsKit/OrdDict.py
 PythonToolsKit/PrintF.py
 PythonToolsKit/Process.py
 PythonToolsKit/Random.py
+PythonToolsKit/RecursionDebug.py
 PythonToolsKit/Report.py
 PythonToolsKit/ScapyTools.py
 PythonToolsKit/StringF.py
