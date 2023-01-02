@@ -223,7 +223,8 @@ coverage html                  # Report in HTML page
  - [Documentation DataAnalysis](https://mauricelambert.github.io/info/python/code/PythonToolsKit/DataAnalysis.html)
  - [Documentation RecursionDebug](https://mauricelambert.github.io/info/python/code/PythonToolsKit/RecursionDebug.html)
  - [Documentation OrdDict](https://mauricelambert.github.io/info/python/code/PythonToolsKit/OrdDict.html)
- - [Documentation OrdDict](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Characters.html)
+ - [Documentation Characters](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Characters.html)
+ - [Executable Characters](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Characters.pyz)
  - [Pypi package](https://pypi.org/project/PythonToolsKit/)
 
 ## Licence
