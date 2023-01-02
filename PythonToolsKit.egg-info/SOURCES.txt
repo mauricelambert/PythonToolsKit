@@ -3,6 +3,7 @@ MANIFEST.in
 README.md
 setup.py
 PythonToolsKit/Arguments.py
+PythonToolsKit/Characters.py
 PythonToolsKit/Colors.py
 PythonToolsKit/DataAnalysis.py
 PythonToolsKit/Dict.py
@@ -36,4 +37,5 @@ PythonToolsKit/urlopen.py
 PythonToolsKit.egg-info/PKG-INFO
 PythonToolsKit.egg-info/SOURCES.txt
 PythonToolsKit.egg-info/dependency_links.txt
+PythonToolsKit.egg-info/entry_points.txt
 PythonToolsKit.egg-info/top_level.txt

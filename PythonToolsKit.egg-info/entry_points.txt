@@ -1,0 +1,3 @@
+[console_scripts]
+Characters = PythonToolsKit.Characters:main
+

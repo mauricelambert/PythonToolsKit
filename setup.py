@@ -46,7 +46,7 @@ setup(
     author_email=package.__author_email__,
     maintainer=package.__maintainer__,
     maintainer_email=package.__maintainer_email__,
-    description=package.__description__,
+    description=package.__description__.strip(),
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     url=package.__url__,
@@ -79,6 +79,8 @@ setup(
         "Documentation DataAnalysis": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/DataAnalysis.html",
         "Documentation RecursionDebug": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/RecursionDebug.html",
         "Documentation OrdDict": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/OrdDict.html",
+        "Documentation Characters": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/Characters.html",
+        "Executable Characters": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/Characters.pyz",
     },
     classifiers=[
         "Programming Language :: Python",
@@ -118,7 +120,19 @@ setup(
         "Dict",
         "Function",
         "Statistic",
+        "Logs",
+        "Characters",
+        "urllib",
+        "Thread",
+        "Import",
+        "Scapy",
+        "Statistics",
     ],
+    entry_points={
+        "console_scripts": [
+            "Characters = PythonToolsKit.Characters:main",
+        ],
+    },
     platforms=["Windows", "Linux", "MacOS"],
     license=package.__license__,
     cmdclass={
@@ -126,3 +140,4 @@ setup(
         "install": PostInstallScript,
     },
 )
+

@@ -122,6 +122,7 @@ Features implemented:
      - Group data by values
  - RecursionDebug: Help you to debug RecursionError
  - OrdDict: A fast and powerful *Ordered Dict*
+ - Characters: Returns integers, string (latin-1), binary and hexadecimal from integers, string (latin-1), binary or hexadecimal
 
 ## Requirements
 
@@ -150,6 +151,22 @@ from PythonToolsKit.Timeout import *
 import PythonToolsKit.Timeout
 ```
 
+### Tools
+
+#### Characters
+
+```bash
+python3 Characters.pyz mystring
+python3 -m PythonToolsKit.Characters integers 97,98,99
+
+Characters string abc
+Characters hexa 616263
+Characters hexa '61-62-63'
+Characters hexa '61 62 63'
+Characters hexa '61:62:63'
+Characters binary '1100001 1100010 1100011'
+```
+
 ## Unittests
 
 For `GetType` and `Json`, `Encodings`, `Colors` and `WindowsTerminal` modules i use `doctest` (unittests in documentation) and `coverage`:
@@ -165,14 +182,15 @@ coverage html                  # Report in HTML page
 | Module             | Coverage  | Statements | missing    |
 |--------------------|-----------|------------|------------|
 | GetType.py         | 100%      | 130        | 000        |
-| Json.py            | 100%      | 46         | 000        |
-| Encodings.py       | 100%      | 54         | 000        |
-| WindowsTerminal.py | 94%       | 96         | 006        |
+| Json.py            | 100%      | 046        | 000        |
+| Encodings.py       | 100%      | 054        | 000        |
+| WindowsTerminal.py | 094%      | 096        | 006        |
 | Colors.py          | 100%      | 176        | 000        |
 | DataAnalysis.py    | 100%      | 290        | 000        |
-| Report.py          | 99%       | 160        | 001        |
-| StringF.py         | 100%      | 67         | 000        |
+| Report.py          | 099%      | 160        | 001        |
+| StringF.py         | 100%      | 067        | 000        |
 | OrdDict.py         | 100%      | 172        | 000        |
+| Characters.py      | 078%      | 063        | 014        |
 
 ## Links
 
@@ -205,8 +223,10 @@ coverage html                  # Report in HTML page
  - [Documentation DataAnalysis](https://mauricelambert.github.io/info/python/code/PythonToolsKit/DataAnalysis.html)
  - [Documentation RecursionDebug](https://mauricelambert.github.io/info/python/code/PythonToolsKit/RecursionDebug.html)
  - [Documentation OrdDict](https://mauricelambert.github.io/info/python/code/PythonToolsKit/OrdDict.html)
+ - [Documentation OrdDict](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Characters.html)
  - [Pypi package](https://pypi.org/project/PythonToolsKit/)
 
 ## Licence
 
 Licensed under the [GPL, version 3](https://www.gnu.org/licenses/).
+
