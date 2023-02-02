@@ -123,6 +123,7 @@ Features implemented:
  - RecursionDebug: Help you to debug RecursionError
  - OrdDict: A fast and powerful *Ordered Dict*
  - Characters: Returns integers, string (latin-1), binary and hexadecimal from integers, string (latin-1), binary or hexadecimal
+ - DebugEncoding: Found used encoding when you have encoding problems
 
 ## Requirements
 
@@ -132,7 +133,8 @@ This package require:
  - python3 Standard Library
  
 > To use `PythonToolsKit.ScapyTools` you need `Scapy`, but is not installed by default (because this is the only module that needs it), install it with `python3 -m pip install scapy`
->> To use `PythonToolsKit.DataAnalysis.show_chart` you need `matplotlib`, but is not installed by default (because this is the only function that needs it), install it with `python3 -m pip install matplotlib`
+
+> To use `PythonToolsKit.DataAnalysis.show_chart` you need `matplotlib`, but is not installed by default (because this is the only function that needs it), install it with `python3 -m pip install matplotlib`
 
 ## Installation
 
@@ -165,6 +167,12 @@ Characters hexa '61-62-63'
 Characters hexa '61 62 63'
 Characters hexa '61:62:63'
 Characters binary '1100001 1100010 1100011'
+
+python3 DebugEncoding.pyz éêâ --bad-values "‚ˆƒ"
+python3 -m PythonToolsKit.DebugEncoding éêâ --decoding cp1252 --bad-values "‚ˆƒ" --json
+
+DebugEncoding éêâ
+DebugEncoding éêâ --encoding cp437
 ```
 
 ## Unittests
@@ -225,6 +233,8 @@ coverage html                  # Report in HTML page
  - [Documentation OrdDict](https://mauricelambert.github.io/info/python/code/PythonToolsKit/OrdDict.html)
  - [Documentation Characters](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Characters.html)
  - [Executable Characters](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Characters.pyz)
+ - [Documentation DebugEncoding](https://mauricelambert.github.io/info/python/code/PythonToolsKit/DebugEncoding.html)
+ - [Executable DebugEncoding](https://mauricelambert.github.io/info/python/code/PythonToolsKit/DebugEncoding.pyz)
  - [Pypi package](https://pypi.org/project/PythonToolsKit/)
 
 ## Licence

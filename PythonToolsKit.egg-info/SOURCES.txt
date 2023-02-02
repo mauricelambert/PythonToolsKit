@@ -1,11 +1,13 @@
 LICENSE.txt
 MANIFEST.in
 README.md
+setup.cfg
 setup.py
 PythonToolsKit/Arguments.py
 PythonToolsKit/Characters.py
 PythonToolsKit/Colors.py
 PythonToolsKit/DataAnalysis.py
+PythonToolsKit/DebugEncoding.py
 PythonToolsKit/Dict.py
 PythonToolsKit/DictObject.py
 PythonToolsKit/Encodings.py

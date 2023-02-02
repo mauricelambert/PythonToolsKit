@@ -81,6 +81,8 @@ setup(
         "Documentation OrdDict": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/OrdDict.html",
         "Documentation Characters": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/Characters.html",
         "Executable Characters": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/Characters.pyz",
+        "Documentation DebugEncoding": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/DebugEncoding.html",
+        "Executable DebugEncoding": "https://mauricelambert.github.io/info/python/code/PythonToolsKit/DebugEncoding.pyz",
     },
     classifiers=[
         "Programming Language :: Python",
@@ -131,6 +133,7 @@ setup(
     entry_points={
         "console_scripts": [
             "Characters = PythonToolsKit.Characters:main",
+            "DebugEncoding = PythonToolsKit.DebugEncoding:main"
         ],
     },
     platforms=["Windows", "Linux", "MacOS"],
