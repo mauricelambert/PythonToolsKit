@@ -3,7 +3,7 @@
 
 ###################
 #    This package implements tools to build python package and tools.
-#    Copyright (C) 2022  Maurice Lambert
+#    Copyright (C) 2022, 2023  Maurice Lambert
 
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -371,7 +371,7 @@ license = "GPL-3.0 License"
 __url__ = "https://github.com/mauricelambert/PythonToolsKit"
 
 copyright = """
-PythonToolsKit  Copyright (C) 2022  Maurice Lambert
+PythonToolsKit  Copyright (C) 2022, 2023  Maurice Lambert
 This program comes with ABSOLUTELY NO WARRANTY.
 This is free software, and you are welcome to redistribute it
 under certain conditions.
@@ -1331,7 +1331,11 @@ class DataAnalysis:
             **kwargs,
         )
         title(chart_title)
-        plot.get_figure().canvas.parent().setWindowTitle("DataAnalysis chart")
+        canvas = plot.get_figure().canvas
+        if get_parent := getattr(canvas, "parent", None):
+            get_parent().setWindowTitle("DataAnalysis chart - " + argv[0])
+        elif manager := getattr(canvas, "manager", None):
+            manager.window.title("DataAnalysis chart - " + argv[0])
         show()
 
 
