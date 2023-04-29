@@ -91,7 +91,6 @@ class DictObject:
 
     def __init__(self, data: dict):
         if isinstance(data, dict):
-
             for key, value in data.items():
                 if isinstance(value, dict):
                     setattr(self, key.replace("-", "_"), DictObject(value))

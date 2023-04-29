@@ -163,7 +163,6 @@ else:
 
 
 def default_key_function(dict_: dict, attribute: str = None) -> Any:
-
     """
     This is a key function for sorted or filter function.
     """
@@ -174,7 +173,6 @@ def default_key_function(dict_: dict, attribute: str = None) -> Any:
 def customfilter(
     function: Callable, objects: Sequence[dict]
 ) -> Tuple[List[dict], List[dict]]:
-
     """
     This function applies a filter on the data.
     """
@@ -205,7 +203,6 @@ class ReportDict:
         self.columns = columns
 
     def report_text(self) -> str:
-
         """
         This function reports dict as text (Makdown).
         """
@@ -234,7 +231,6 @@ class ReportDict:
         )
 
     def report_CSV(self, *args, **kwargs) -> str:
-
         """
         This function reports dict as CSV.
 
@@ -248,7 +244,6 @@ class ReportDict:
         return report.getvalue()
 
     def report_HTML(self) -> str:
-
         """
         This function reports dict as HTML.
         """
@@ -268,7 +263,6 @@ class ReportDict:
         return html + "</tbody><tfoot></tfoot></table>"
 
     def report_JSON(self, *args, indent=4, **kwargs) -> str:
-
         """
         This function reports dict as JSON.
         """
@@ -320,7 +314,6 @@ class Report:
     def get_dicts(
         objects: Union[Sequence[dict], Sequence[object]]
     ) -> Iterator[dict]:
-
         """
         This function returns dict from dict or object.
         """
@@ -338,7 +331,6 @@ class Report:
     def frequence(
         self, filtered: bool = False, pourcent: bool = True
     ) -> float:
-
         """
         This function returns the frequence of used/filtered objects
         for report.
@@ -359,7 +351,6 @@ class Report:
         return (number / total * 100) if pourcent else (number / total)
 
     def report_text(self, *args, filtered: bool = False, **kwargs) -> str:
-
         """
         This function returns a text table to report
         objects.
@@ -379,7 +370,6 @@ class Report:
         )
 
     def report_HTML(self, filtered: bool = False):
-
         """
         This function returns a text table to report
         objects.
@@ -410,7 +400,6 @@ class Report:
     def report_JSON(
         self, *args, filtered: bool = False, indent: int = 4, **kwargs
     ) -> str:
-
         """
         This function returns a JSON array of dict to report
         objects.
@@ -426,7 +415,6 @@ class Report:
         return dumps(objects, *args, indent=indent, **kwargs)
 
     def report_CSV(self, *args, filtered: bool = False, **kwargs):
-
         """
         This function returns a CSV content to report
         objects.
@@ -450,7 +438,6 @@ class Report:
     def statistic(
         self, attributes: Sequence[str] = None, filtered: bool = False
     ) -> List[Dict[str, Union[str, int]]]:
-
         """
         This function returns statistics to report
         objects statistics.

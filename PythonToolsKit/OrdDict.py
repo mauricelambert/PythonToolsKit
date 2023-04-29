@@ -350,7 +350,6 @@ class OrdDict:
         yield from ((key, self.dict[key]) for key in self.list)
 
     def to_dict(self) -> Dict[Hashable, Any]:
-
         """
         This method returns a dict from OrdDict instance.
         """
@@ -358,7 +357,6 @@ class OrdDict:
         return {key: self.dict[key] for key in self.list}
 
     def add(self, item: Hashable, value: Any) -> None:
-
         """
         This method adds an item to OrdDict instance.
         """
@@ -368,7 +366,6 @@ class OrdDict:
     def insert(
         self, index: int, item: Hashable, value: Any, error: bool = True
     ) -> None:
-
         """
         This method inserts an item in 'index' position.
         """
@@ -386,7 +383,6 @@ class OrdDict:
             self.dict[item] = value
 
     def modify(self, item: Hashable, value: Any, error: bool = True) -> None:
-
         """
         This method updates value for an item.
         """
@@ -403,7 +399,6 @@ class OrdDict:
         self.dict[item] = value
 
     def move(self, index: int, item: Hashable) -> None:
-
         """
         This method moves an item.
         """
@@ -412,7 +407,6 @@ class OrdDict:
         self.list.insert(index, item)
 
     def delete(self, item: Hashable) -> None:
-
         """
         This method deletes an item.
         """
@@ -421,7 +415,6 @@ class OrdDict:
         self.list.remove(item)
 
     def values(self) -> Iterable[Any]:
-
         """
         This method yields values.
         """
@@ -429,7 +422,6 @@ class OrdDict:
         yield from (self.dict[key] for key in self.list)
 
     def keys(self) -> Iterable[Hashable]:
-
         """
         This method yields keys.
         """
@@ -437,7 +429,6 @@ class OrdDict:
         yield from (key for key in self.list)
 
     def items(self) -> Iterable[Tuple[Hashable, Any]]:
-
         """
         This method yields keys and values.
         """
@@ -445,7 +436,6 @@ class OrdDict:
         yield from ((key, self.dict[key]) for key in self.list)
 
     def get(self, item: Hashable) -> Any:
-
         """
         This method returns the value from item
         """
@@ -453,7 +443,6 @@ class OrdDict:
         return self.dict[item]
 
     def setdefault(self, item: Hashable, value: Any) -> Any:
-
         """
         This method sets the value and returns it or returns the value.
         """
@@ -467,7 +456,6 @@ class OrdDict:
         return value
 
     def index(self, item: Hashable) -> int:
-
         """
         This method returns the position's key.
         """
@@ -475,7 +463,6 @@ class OrdDict:
         return self.list.index(item)
 
     def index_value(self, index: int) -> Any:
-
         """
         This method returns the value's position.
         """
@@ -483,7 +470,6 @@ class OrdDict:
         return self.dict[self.list[index]]
 
     def index_key(self, index: int) -> Hashable:
-
         """
         This method returns the item's position.
         """
@@ -491,7 +477,6 @@ class OrdDict:
         return self.list[index]
 
     def get_key_value(self, index: int) -> Tuple[Hashable, Any]:
-
         """
         This method returns item and value from index.
         """
@@ -500,7 +485,6 @@ class OrdDict:
         return key, self.dict[key]
 
     def remove(self, index: int) -> None:
-
         """
         This method deletes items from index.
         """
@@ -509,7 +493,6 @@ class OrdDict:
         del self.dict[key]
 
     def reverse(self) -> None:
-
         """
         This method deletes items from index.
         """
@@ -517,7 +500,6 @@ class OrdDict:
         self.list.reverse()
 
     def copy(self) -> OrdDict:
-
         """
         This method returns an OrdDict with
         same postions, keys and values.
@@ -526,7 +508,6 @@ class OrdDict:
         return OrdDict(self.to_dict())
 
     def update(self, dict_: Dict[Hashable, Any]) -> Any:
-
         """
         This method changes values or adds items
         from a dict.
@@ -541,7 +522,6 @@ class OrdDict:
             self.dict[key] = value
 
     def clear(self) -> None:
-
         """
         This method clears OrdDict.
         """
@@ -550,7 +530,6 @@ class OrdDict:
         self.dict.clear()
 
     def extend(self, dict_: Dict[Hashable, Any]) -> None:
-
         """
         This method setdefaults all keys and values from dict.
         """
@@ -563,7 +542,6 @@ class OrdDict:
                 self.list.append(key)
 
     def pop(self, item: Hashable) -> Any:
-
         """
         This method deletes and returns a value from item.
         """
@@ -572,7 +550,6 @@ class OrdDict:
         return self.dict.pop(item)
 
     def popitem(self) -> Tuple[Hashable, Any]:
-
         """
         This method deletes and returns the last key and value.
         """
@@ -581,7 +558,6 @@ class OrdDict:
         return key, self.dict.pop(key)
 
     def pop_index(self, index: int = -1) -> Tuple[Hashable, Any]:
-
         """
         This method deletes and returns key and value from index.
         """
@@ -590,7 +566,6 @@ class OrdDict:
         return key, self.dict.pop(key)
 
     def sort(self) -> None:
-
         """
         This method sorts OrdDict by keys.
         """

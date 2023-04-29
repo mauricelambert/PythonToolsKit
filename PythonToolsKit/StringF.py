@@ -106,7 +106,6 @@ from typing import Union
 def string_lengthformat(
     string: str, length: int = 13, end: str = "...", separator: str = ","
 ) -> str:
-
     """
     This function formats string length.
 
@@ -137,7 +136,6 @@ def strings_tableformat(
     separator: str = "|",
     columns: Iterator[str] = None,
 ) -> str:
-
     """
     This function returns a formatted table of strings.
 
@@ -191,7 +189,6 @@ def strings_tableformat(
         table.append(second_line)
 
     for string_iter in strings:
-
         line = [separator]
         for string in string_iter:
             line.append(

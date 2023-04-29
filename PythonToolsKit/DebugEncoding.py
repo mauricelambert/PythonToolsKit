@@ -416,12 +416,13 @@ from contextlib import suppress
 from sys import exit, stdout
 from json import dump
 
+
 @dataclass
 class WorkingEncoding:
 
     """
     This dataclass stores working encodings (encode
-    and decode without raised exceptions) data. 
+    and decode without raised exceptions) data.
     """
 
     encoding: str
@@ -429,84 +430,142 @@ class WorkingEncoding:
     decoded_values: str
     bad_values: str
 
-def debug_encoding(values_to_test: str, bad_values: str = None, encoding: str = None, decoding: str = None) -> Tuple[List[WorkingEncoding], Dict[str, List[WorkingEncoding]]]:
 
+def debug_encoding(
+    values_to_test: str,
+    bad_values: str = None,
+    encoding: str = None,
+    decoding: str = None,
+) -> Tuple[List[WorkingEncoding], Dict[str, List[WorkingEncoding]]]:
     """
     This function helps developers to debug encodings.
     """
-    
+
     working_encodings = defaultdict(list)
     matching_encodings = []
-    
+
     decodings = encodings = set(aliases.values())
-    
+
     if encoding:
         encodings = (encoding,)
-        
+
     if decoding:
         decodings = (decoding,)
-    
+
     for encoding in encodings:
         for decoding in decodings:
             if encoding == decoding:
                 continue
             with suppress(UnicodeEncodeError, LookupError, UnicodeDecodeError):
                 values = values_to_test.encode(encoding).decode(decoding)
-                working = WorkingEncoding(encoding, decoding, values, bad_values)
+                working = WorkingEncoding(
+                    encoding, decoding, values, bad_values
+                )
                 working_encodings[values].append(working)
                 if values == bad_values:
                     matching_encodings.append(working)
-    
+
     return matching_encodings, working_encodings
 
-def parse_args() -> Namespace:
 
+def parse_args() -> Namespace:
     """
     This function parses command line arguments.
     """
-    
-    parser = ArgumentParser(description="This script helps you to debug encoding problems.")
-    encodings = parser.add_mutually_exclusive_group()
-    encodings.add_argument('--encoding', '-e', help='If you know what encoding this text is encoded with, specify it in this argument.')
-    encodings.add_argument('--decoding', '-d', help='If you know what encoding this text is decoded with, specify it in this argument.')
-    parser.add_argument('--bad-values', '--values', '-v', help='How tested values are printed when you have your encoding problems.')
-    parser.add_argument('--json', '-j', action="store_true", help='JSON output.')
-    parser.add_argument('value_to_test')
-    return parser.parse_args()
-    
-def main() -> int:
 
+    parser = ArgumentParser(
+        description="This script helps you to debug encoding problems."
+    )
+    encodings = parser.add_mutually_exclusive_group()
+    encodings.add_argument(
+        "--encoding",
+        "-e",
+        help="If you know what encoding this text is encoded with, specify it in this argument.",
+    )
+    encodings.add_argument(
+        "--decoding",
+        "-d",
+        help="If you know what encoding this text is decoded with, specify it in this argument.",
+    )
+    parser.add_argument(
+        "--bad-values",
+        "--values",
+        "-v",
+        help="How tested values are printed when you have your encoding problems.",
+    )
+    parser.add_argument(
+        "--json", "-j", action="store_true", help="JSON output."
+    )
+    parser.add_argument("value_to_test")
+    return parser.parse_args()
+
+
+def main() -> int:
     """
     This function executes this script from the command line.
     """
-    
+
     arguments = parse_args()
-    matching_encodings, working_encodings = debug_encoding(arguments.value_to_test, arguments.bad_values, arguments.encoding, arguments.decoding)
+    matching_encodings, working_encodings = debug_encoding(
+        arguments.value_to_test,
+        arguments.bad_values,
+        arguments.encoding,
+        arguments.decoding,
+    )
 
     if matching_encodings:
         if arguments.json:
-            dump([{attr: getattr(encoding, attr) for attr in dir(encoding) if not attr.startswith("__") and not attr.endswith("__")} for encoding in matching_encodings ], stdout, indent=4)
+            dump(
+                [
+                    {
+                        attr: getattr(encoding, attr)
+                        for attr in dir(encoding)
+                        if not attr.startswith("__")
+                        and not attr.endswith("__")
+                    }
+                    for encoding in matching_encodings
+                ],
+                stdout,
+                indent=4,
+            )
             return 0
-        print("\n".join(
-            f'Encoding: {encoding.encoding!r}, '
-            f'Decoding: {encoding.decoding!r}, '
-            f'Output: {encoding.decoded_values!r}'
-            for encoding in matching_encodings
-        ))
+        print(
+            "\n".join(
+                f"Encoding: {encoding.encoding!r}, "
+                f"Decoding: {encoding.decoding!r}, "
+                f"Output: {encoding.decoded_values!r}"
+                for encoding in matching_encodings
+            )
+        )
         return 0
 
     if arguments.json:
-        dump({k: {attr: getattr(encoding, attr) for attr in dir(encoding) if not attr.startswith("__") and not attr.endswith("__")} for k, values in working_encodings.items() for encoding in values}, stdout, indent=4)
+        dump(
+            {
+                k: {
+                    attr: getattr(encoding, attr)
+                    for attr in dir(encoding)
+                    if not attr.startswith("__") and not attr.endswith("__")
+                }
+                for k, values in working_encodings.items()
+                for encoding in values
+            },
+            stdout,
+            indent=4,
+        )
         return 0
 
-    print("\n".join(
-        f'Output: {encoding.decoded_values!r}:\n\t'
-        f'Encoding: {encoding.encoding!r}, '
-        f'Decoding: {encoding.decoding!r}'
-        for encodings in working_encodings.values()
-        for encoding in encodings
-    ))
+    print(
+        "\n".join(
+            f"Output: {encoding.decoded_values!r}:\n\t"
+            f"Encoding: {encoding.encoding!r}, "
+            f"Decoding: {encoding.decoding!r}"
+            for encodings in working_encodings.values()
+            for encoding in encodings
+        )
+    )
     return 0
+
 
 if __name__ == "__main__":
     exit(main())

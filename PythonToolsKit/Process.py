@@ -75,7 +75,6 @@ from typing import Tuple
 def real_time_process_output(
     *args, input: bytes = b"", timeout: int = 0, **kwargs
 ) -> Iterator[Tuple[bytes, bytes, int]]:
-
     """
     This function returns lines of process in real time.
 

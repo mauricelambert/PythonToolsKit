@@ -138,7 +138,6 @@ from functools import partial
 
 
 def get_encodings():
-
     """
     This function returns the probable encodings.
 
@@ -161,7 +160,6 @@ def get_encodings():
 
 
 def decode_data(data: bytes) -> str:
-
     """
     This function decodes data (try some encodings).
 
@@ -197,7 +195,6 @@ b64decode_lines = decodebytes
 
 
 def urlsafe_b64encode(data: bytes) -> bytes:
-
     """
     Same as base64.urlsafe_b64encode
 
@@ -210,7 +207,6 @@ def urlsafe_b64encode(data: bytes) -> bytes:
 
 
 def urlsafe_b64decode(data: bytes) -> bytes:
-
     """
     Same as base64.urlsafe_b64decode
 

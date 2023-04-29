@@ -3,7 +3,7 @@
 
 ###################
 #    This package implements tools to build python package and tools.
-#    Copyright (C) 2022  Maurice Lambert
+#    Copyright (C) 2022, 2023  Maurice Lambert
 
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -43,9 +43,30 @@ This package implements tools to build python package and tools.
 <NetworkInterface ...>
 >>> arg.parse_args(["--interface", "0A:00:34:"]).iface
 <NetworkInterface ...>
+
+>>> get_ip_interfaces()
+{'172.16.40.10': Interface(ip=IPv4Address('172.16.40.10'), network=IPv4Network('172.16.0.0/16'), route=(2886729728, 4294901760, '0.0.0.0', 'eth0', '172.16.0.1', 5256), interface=<NetworkInterface eth0 [UP+BROADCAST+RUNNING+SLAVE]>)}
+>>> get_ip_interfaces(4)
+{'172.16.40.10': Interface(ip=IPv4Address('172.16.40.10'), network=IPv4Network('172.16.0.0/16'), route=(2886729728, 4294901760, '0.0.0.0', 'eth0', '172.16.0.1', 5256), interface=<NetworkInterface eth0 [UP+BROADCAST+RUNNING+SLAVE]>)}
+>>> get_ip_interfaces(6)
+{'fe80::5656:5247:a5d8:dbce': Interface(ip=IPv6Address('fe80::5656:5247:a5d8:dbce'), network=IPv6Network('fe80::5656:5247:a5d8:dbce/128'), route=('fe80::5656:5247:a5d8:dbce', 128, '::', 'eth0', ['fe80::5656:5247:a5d8:dbce'], 5256), interface=<NetworkInterface eth0 [UP+BROADCAST+RUNNING+SLAVE]>)}
+
+>>> get_gateway()
+'172.16.0.1'
+>>> get_gateway(4)
+'172.16.0.1'
+>>> get_gateway(6)
+'fe80::5656:5247:a5d8:dbce'
+
+>>> get_gateway_route()
+Interface(ip=IPv4Address('172.16.40.10'), network=IPv4Network('172.16.0.0/16'), route=(2886729728, 4294901760, '0.0.0.0', 'eth0', '172.16.0.1', 5256), interface=<NetworkInterface eth0 [UP+BROADCAST+RUNNING+SLAVE]>)
+>>> get_gateway_route(4)
+Interface(ip=IPv4Address('172.16.40.10'), network=IPv4Network('172.16.0.0/16'), route=(2886729728, 4294901760, '0.0.0.0', 'eth0', '172.16.0.1', 5256), interface=<NetworkInterface eth0 [UP+BROADCAST+RUNNING+SLAVE]>)
+>>> get_gateway_route(6)
+Interface(ip=IPv6Address('fe80::5656:5247:a5d8:dbce'), network=IPv6Network('fe80::5656:5247:a5d8:dbce/128'), route=('fe80::5656:5247:a5d8:dbce', 128, '::', 'eth0', ['fe80::5656:5247:a5d8:dbce'], 5256), interface=<NetworkInterface eth0 [UP+BROADCAST+RUNNING+SLAVE]>)
 """
 
-__version__ = "0.0.1"
+__version__ = "0.1.0"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -57,7 +78,7 @@ license = "GPL-3.0 License"
 __url__ = "https://github.com/mauricelambert/PythonToolsKit"
 
 copyright = """
-PythonToolsKit  Copyright (C) 2022  Maurice Lambert
+PythonToolsKit  Copyright (C) 2022, 2023  Maurice Lambert
 This program comes with ABSOLUTELY NO WARRANTY.
 This is free software, and you are welcome to redistribute it
 under certain conditions.
@@ -65,19 +86,47 @@ under certain conditions.
 __license__ = license
 __copyright__ = copyright
 
-__all__ = ["ScapyArguments"]
+__all__ = [
+    "ScapyArguments",
+    "get_gateway_route",
+    "get_gateway",
+    "get_ip_interfaces",
+    "Interface",
+]
 
+from ipaddress import (
+    IPv4Address,
+    IPv4Network,
+    IPv6Address,
+    IPv6Network,
+    ip_address,
+    ip_network,
+)
+from typing import NewType, Union, Dict, List, Tuple
 from argparse import ArgumentParser, Namespace
+from dataclasses import dataclass
 from sys import executable
-from typing import List
 
 try:
-    from scapy.all import IFACES, conf
-except ImportError:
+    from scapy.all import IFACES, conf, NetworkInterface, ltoa
+except ImportError as e:
     raise ImportError(
         "Scapy should be installed to use this module.\n"
         f"You can install it with: {executable} -m pip install scapy"
-    )
+    ) from e
+
+
+IPv6Route = NewType("IPv6Route", Tuple[str, int, str, str, List[str], int])
+IPv4Route = NewType("IPv4Route", Tuple[int, int, str, str, str, int])
+Route = NewType("Route", Union[IPv4Route, IPv6Route])
+
+
+@dataclass
+class Interface:
+    ip: ip_address
+    network: ip_network
+    route: Route
+    interface: NetworkInterface
 
 
 class ScapyArguments(ArgumentParser):
@@ -107,7 +156,6 @@ class ScapyArguments(ArgumentParser):
     def parse_args(
         self, args: List[str] = None, namespace: Namespace = None
     ) -> Namespace:
-
         """
         This function implements the iface
         research from interface arguments.
@@ -127,7 +175,6 @@ class ScapyArguments(ArgumentParser):
             interface = interface.casefold()
 
             for temp_iface in IFACES.values():
-
                 ip = temp_iface.ip
                 mac = temp_iface.mac or ""
                 name = temp_iface.name or ""
@@ -148,3 +195,79 @@ class ScapyArguments(ArgumentParser):
 
         namespace.iface = conf.iface
         return namespace
+
+
+def get_ip_interfaces(version: int = 4) -> Dict[str, Interface]:
+    """
+    This function generates a dict of Interfaces by IP
+    (version should be 4 for IPv4 addresses and 6 for IPv6 addresses).
+    """
+
+    if version == 4:
+        return {
+            ip: Interface(
+                IPv4Address(ip),
+                IPv4Network("%s/%s" % (ltoa(route[0]), ltoa(route[1]))),
+                route,
+                interface,
+            )
+            for interface in IFACES.data.values()
+            for ip in interface.ips[4]
+            for route in conf.route.routes
+            if route[1] != 4294967295
+            and IPv4Address(ip)
+            in IPv4Network("%s/%s" % (ltoa(route[0]), ltoa(route[1])))
+        }
+    elif version == 6:
+        return {
+            ip: Interface(
+                IPv6Address(ip),
+                IPv6Network("%s/%i" % (route[0], route[1])),
+                route,
+                interface,
+            )
+            for interface in IFACES.data.values()
+            for ip in interface.ips[6]
+            for route in conf.route6.routes
+            if IPv6Address(ip) in IPv6Network("%s/%i" % (route[0], route[1]))
+        }
+    else:
+        raise ValueError(
+            "Version (first and optional argument should"
+            " be 4 for IPv4 addresses or 6 for IPv6 addresses."
+        )
+
+
+def get_gateway(version: int = 4) -> str:
+    """
+    This function returns gateway (IPv4 or IPv6).
+    """
+
+    if version == 4:
+        return conf.route.route("0.0.0.0")[2]
+    elif version == 6:
+        return conf.route6.route("::/0")[2]
+    else:
+        raise ValueError(
+            "Version (first and optional argument should"
+            " be 4 for IPv4 addresses or 6 for IPv6 addresses."
+        )
+
+
+def get_gateway_route(version: int = 4) -> Interface:
+    """
+    This function returns the gateway Interface.
+    """
+
+    gateway = ip_address(get_gateway(version))
+    interfaces = get_ip_interfaces(version)
+
+    for interface in interfaces.values():
+        if gateway in interface.network:
+            return interface
+
+    _interface = get_gateway_route(4 if version == 6 else 4)
+
+    for interface in interfaces.values():
+        if interface.interface is _interface.interface:
+            return interface

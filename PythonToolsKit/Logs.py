@@ -97,7 +97,6 @@ from os import remove
 
 
 def get_custom_logger(name: str = None) -> Logger:
-
     """
     This function create a custom logger.
     """
@@ -138,7 +137,6 @@ logger_trace: Callable = logger.trace
 
 
 def log_trace(function: FunctionType) -> FunctionType:
-
     """
     This decorator trace functions (start and end).
     """
@@ -170,7 +168,6 @@ class CsvFormatter(Formatter):
         self.writerow = writer_.writerow
 
     def format(self, record):
-
         """
         This function formats record in CSV.
         """
@@ -217,7 +214,6 @@ class ColoredLogger:
         self._critical = logger.critical
 
     def debug(self, log: str) -> None:
-
         """
         This function logs a colored debug message.
         """
@@ -225,7 +221,6 @@ class ColoredLogger:
         self._debug(f"\x1b[32m{log}\x1b[0m")
 
     def info(self, log: str) -> None:
-
         """
         This function logs a colored info message.
         """
@@ -233,7 +228,6 @@ class ColoredLogger:
         self._info(f"\x1b[34m{log}\x1b[0m")
 
     def warning(self, log: str) -> None:
-
         """
         This function logs a colored warning message.
         """
@@ -241,7 +235,6 @@ class ColoredLogger:
         self._warning(f"\x1b[33m{log}\x1b[0m")
 
     def error(self, log: str) -> None:
-
         """
         This function logs a colored error message.
         """
@@ -249,7 +242,6 @@ class ColoredLogger:
         self._error(f"\x1b[35m{log}\x1b[0m")
 
     def critical(self, log: str) -> None:
-
         """
         This function logs a colored critical message.
         """
@@ -264,7 +256,6 @@ class CompressLogHandler(RotatingFileHandler):
     """
 
     def doRollover(self):
-
         """
         Do a rollover, as described in __init__().
         """
@@ -289,7 +280,6 @@ class CompressLogHandler(RotatingFileHandler):
             stream = self._open()
 
     def namer(self, name: str) -> str:
-
         """
         This function returns the new name of the old log files.
         """
@@ -297,7 +287,6 @@ class CompressLogHandler(RotatingFileHandler):
         return f"{name}.gz"
 
     def rotator(self, source: str, destination: str) -> None:
-
         """
         This function compresses old log files.
         """

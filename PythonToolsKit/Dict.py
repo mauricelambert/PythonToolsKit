@@ -104,7 +104,6 @@ from typing import List, Dict, Any
 
 
 def cleandict(dict_: dict, keys: List[Hashable], invers: bool = False) -> dict:
-
     """
     This function clean a dictionary.
     """
@@ -122,7 +121,6 @@ def cleandict(dict_: dict, keys: List[Hashable], invers: bool = False) -> dict:
 
 
 def copy_cleandict(dict_: dict, *args, **kwargs) -> dict:
-
     """
     This function copy and clean a dictionary.
 
@@ -134,7 +132,6 @@ def copy_cleandict(dict_: dict, *args, **kwargs) -> dict:
 
 class dict(dict):
     def __or__(self, other: Callable) -> Dict[Hashable, Any]:
-
         """
         This function implements '<dict> | <function>'.
         """
@@ -142,7 +139,6 @@ class dict(dict):
         return dict((k, other(k, v)) for k, v in self.items())
 
     def __ior__(self, other: Callable) -> Dict[Hashable, Any]:
-
         """
         This function implements '<dict> |= <function>'.
         """
@@ -150,7 +146,6 @@ class dict(dict):
         return dict((k, other(k, v)) for k, v in self.items())
 
     def __matmul__(self, other: Callable) -> Dict[Hashable, Any]:
-
         """
         This function implements '<dict> @ function'.
         """
@@ -158,7 +153,6 @@ class dict(dict):
         return dict((k, other(k)) for k in self.keys())
 
     def __imatmul__(self, other: Callable) -> Dict[Hashable, Any]:
-
         """
         This function implements '<dict> @= function'.
         """
@@ -166,7 +160,6 @@ class dict(dict):
         return dict((k, other(k)) for k in self.keys())
 
     def __invert__(self) -> Dict[Hashable, Any]:
-
         """
         This function implements '~<dict>'.
         """
@@ -174,7 +167,6 @@ class dict(dict):
         return dict((v, k) for k, v in self.items())
 
     def __inv__(self) -> Dict[Hashable, Any]:
-
         """
         This function implements '~<dict>'.
         """
@@ -182,7 +174,6 @@ class dict(dict):
         return dict((v, k) for k, v in self.items())
 
     def __rshift__(self, other: Callable) -> Dict[Hashable, Any]:
-
         """
         This function implements '<dict> >> function'.
         """
@@ -190,7 +181,6 @@ class dict(dict):
         return dict((k, other(v)) for k, v in self.items())
 
     def __irshift__(self, other: Callable) -> Dict[Hashable, Any]:
-
         """
         This function implements '<dict> >> function'.
         """
@@ -198,7 +188,6 @@ class dict(dict):
         return dict((k, other(v)) for k, v in self.items())
 
     def __sub__(self, other: Iterator[Hashable]) -> Dict[Hashable, Any]:
-
         """
         This function implements '<dict> - <Iterator>'
         """
@@ -206,7 +195,6 @@ class dict(dict):
         return dict((k, v) for k, v in self.items() if k not in other)
 
     def __isub__(self, other: Iterator[Hashable]) -> Dict[Hashable, Any]:
-
         """
         This function implements '<dict> -= <Iterator>'
         """
@@ -214,7 +202,6 @@ class dict(dict):
         return dict((k, v) for k, v in self.items() if k not in other)
 
     def __add__(self, other: Iterator[Hashable]) -> Dict[Hashable, Any]:
-
         """
         This function implements '<dict> + <Iterator>'
         """
@@ -222,7 +209,6 @@ class dict(dict):
         return dict((k, v) for k, v in self.items() if k in other)
 
     def __iadd__(self, other: Iterator[Hashable]) -> Dict[Hashable, Any]:
-
         """
         This function implements '<dict> += <Iterator>'
         """

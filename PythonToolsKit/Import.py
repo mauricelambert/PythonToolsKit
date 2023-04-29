@@ -55,7 +55,6 @@ from types import ModuleType
 
 
 def reload(module: ModuleType) -> ModuleType:
-
     """
     This function reload a module.
     """
@@ -64,7 +63,6 @@ def reload(module: ModuleType) -> ModuleType:
 
 
 def import_from_filename(filename: str) -> ModuleType:
-
     """
     This function returns a module from path/filename.
     """

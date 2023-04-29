@@ -401,7 +401,6 @@ DataAnalysis = TypeVar("DataAnalysis")
 
 
 class DataAnalysis:
-
     valuetype = namedtuple("valuetype", ["key", "value", "counter"])
     statistictype = namedtuple("statistictype", ["key", "value"])
 
@@ -424,7 +423,6 @@ class DataAnalysis:
     def get_iterator_tuples(
         data: Iterable[Union[Dict[Hashable, Value]], Iterable[Value]]
     ) -> Iterable[Tuple[Hashable, Value]]:
-
         """
         This function returns an iterator of tuples from dict or Iterable.
         """
@@ -435,7 +433,6 @@ class DataAnalysis:
             return enumerate(data)
 
     def build_keys(self) -> None:
-
         """
         This function build data keys (reqired for all functions).
         """
@@ -452,7 +449,6 @@ class DataAnalysis:
         for data in datas:
             elements = get_iterator_tuples(data)
             for key, value in elements:
-
                 filter_ = filters_get(key)
                 if (fields_is_not_None and key not in fields) or (
                     filter_ and not filter_(value)
@@ -464,7 +460,6 @@ class DataAnalysis:
     def get_numbers_by_key(
         self, key: Hashable
     ) -> Union[List[Union[int, float]], None]:
-
         """
         This function returns a list of numbers by key value.
         """
@@ -477,7 +472,6 @@ class DataAnalysis:
         return all_values or None
 
     def get_median(self, key: Hashable) -> statistictype:
-
         """
         This function returns median for a specific key.
         """
@@ -485,7 +479,6 @@ class DataAnalysis:
         return self.get_statistic(key, median)
 
     def get_medians(self) -> Iterable[statistictype]:
-
         """
         This function returns medians.
         """
@@ -493,7 +486,6 @@ class DataAnalysis:
         yield from self.get_statistics(median)
 
     def get_deviation(self, key: Hashable) -> statistictype:
-
         """
         This function returns deviation for a specific key.
         """
@@ -501,7 +493,6 @@ class DataAnalysis:
         return self.get_statistic(key, pstdev)
 
     def get_deviations(self) -> Iterable[statistictype]:
-
         """
         This function returns deviations.
         """
@@ -509,7 +500,6 @@ class DataAnalysis:
         yield from self.get_statistics(pstdev)
 
     def get_variance(self, key: Hashable) -> statistictype:
-
         """
         This function returns variance for a specific key.
         """
@@ -517,7 +507,6 @@ class DataAnalysis:
         return self.get_statistic(key, variance)
 
     def get_variances(self) -> Iterable[statistictype]:
-
         """
         This function returns variances.
         """
@@ -525,7 +514,6 @@ class DataAnalysis:
         yield from self.get_statistics(variance)
 
     def get_average(self, key: Hashable) -> statistictype:
-
         """
         This function returns average for a specific key.
         """
@@ -533,7 +521,6 @@ class DataAnalysis:
         return self.get_statistic(key, fmean)
 
     def get_averages(self) -> Iterable[statistictype]:
-
         """
         This function returns averages.
         """
@@ -541,7 +528,6 @@ class DataAnalysis:
         yield from self.get_statistics(fmean)
 
     def get_sum(self, key: Hashable) -> statistictype:
-
         """
         This function returns sum for a specific key.
         """
@@ -549,7 +535,6 @@ class DataAnalysis:
         return self.get_statistic(key, sum)
 
     def get_sums(self) -> Iterable[statistictype]:
-
         """
         This function returns sums.
         """
@@ -557,7 +542,6 @@ class DataAnalysis:
         yield from self.get_statistics(sum)
 
     def get_maximum(self, key: Hashable) -> statistictype:
-
         """
         This function returns maximum for a specific key.
         """
@@ -569,7 +553,6 @@ class DataAnalysis:
         )
 
     def get_maximums(self) -> Iterable[statistictype]:
-
         """
         This function returns maximums.
         """
@@ -580,7 +563,6 @@ class DataAnalysis:
         )
 
     def get_minimum(self, key: Hashable) -> statistictype:
-
         """
         This function returns minimum for a specific key.
         """
@@ -592,7 +574,6 @@ class DataAnalysis:
         )
 
     def get_minimums(self) -> Iterable[statistictype]:
-
         """
         This function returns minimums.
         """
@@ -608,7 +589,6 @@ class DataAnalysis:
         function: Callable,
         valuegetter: Callable = None,
     ) -> statistictype:
-
         """
         This function returns specific statistic for a specific key.
         """
@@ -625,7 +605,6 @@ class DataAnalysis:
     def get_statistics(
         self, function: Callable, valuegetter: Callable = None
     ) -> Iterable[statistictype]:
-
         """
         This function returns specific statistics.
         """
@@ -637,7 +616,6 @@ class DataAnalysis:
         )
 
     def count_value(self, key: Hashable, value: Value) -> valuetype:
-
         """
         This function returns valuetype representing
         a key value and counter of this value.
@@ -650,7 +628,6 @@ class DataAnalysis:
     def compare_values(
         self, function: Callable, value1: valuetype, value2: valuetype
     ) -> bool:
-
         """
         This function compares valuetypes.
         """
@@ -664,7 +641,6 @@ class DataAnalysis:
         match_action: Callable,
         not_match_action: Callable = lambda x: None,
     ) -> Any:
-
         """
         This function calls match_action if event
         return is True else calls not_match_action.
@@ -682,7 +658,6 @@ class DataAnalysis:
         )
 
     def count_gt(self, value: valuetype) -> int:
-
         """
         This function counts values greater than value.
         """
@@ -697,7 +672,6 @@ class DataAnalysis:
         )
 
     def count_lt(self, value: valuetype) -> int:
-
         """
         This function counts values lesser than value.
         """
@@ -712,7 +686,6 @@ class DataAnalysis:
         )
 
     def get_gt(self, value: valuetype) -> Iterable[valuetype]:
-
         """
         This function yields valuetype greater than value.
         """
@@ -724,7 +697,6 @@ class DataAnalysis:
         )
 
     def get_lt(self, value: valuetype) -> Iterable[valuetype]:
-
         """
         This function yields valuetype lesser than value.
         """
@@ -736,7 +708,6 @@ class DataAnalysis:
         )
 
     def get_values_by_key(self, key: Hashable) -> Iterable[valuetype]:
-
         """
         This function returns the list of
         keys, values and counters for a key.
@@ -749,7 +720,6 @@ class DataAnalysis:
         )
 
     def count_values_by_key(self, key: Hashable) -> statistictype:
-
         """
         This functions returns a statistictype with
         key and counter of differents values for this key.
@@ -758,7 +728,6 @@ class DataAnalysis:
         return self.statistictype(key=key, value=len(self.keys[key]))
 
     def count_values_by_keys(self) -> Iterable[statistictype]:
-
         """
         This functions returns statistictypes with
         key and counter of differents values for this key.
@@ -767,7 +736,6 @@ class DataAnalysis:
         yield from (self.count_values_by_key(key) for key in self.keys.keys())
 
     def get_values(self) -> Iterable[valuetype]:
-
         """
         This function returns a list of
         each keys, values and counters.
@@ -781,7 +749,6 @@ class DataAnalysis:
         )
 
     def get_all_values(self) -> Iterable[valuetype]:
-
         """
         This function returns a list of
         all keys, values and counters.
@@ -796,7 +763,6 @@ class DataAnalysis:
         )
 
     def sort_by_value(self, *args, **kwargs) -> valuetype:
-
         """
         This functions returns keys, values
         and counters sorted by values.
@@ -807,7 +773,6 @@ class DataAnalysis:
         )
 
     def sort_values_by_sum(self, *args, **kwargs) -> Iterable[valuetype]:
-
         """
         This functions returns keys, values
         and counters sorted by sum of values.
@@ -821,7 +786,6 @@ class DataAnalysis:
         )
 
     def get_keys_counter(self) -> Counter:
-
         """
         This function returns a Counter object
         representing key and sum of the values.
@@ -836,7 +800,6 @@ class DataAnalysis:
         return counter
 
     def get_values_counter(self) -> Counter:
-
         """
         This function returns a Counter object
         representing values and values count.
@@ -851,7 +814,6 @@ class DataAnalysis:
         return counter
 
     def get_keys_values_counter(self) -> Counter:
-
         """
         This function returns a Counter object
         representing valuetypes and sum of the values.
@@ -869,7 +831,6 @@ class DataAnalysis:
         return counter
 
     def get_keys_values_count_counter(self) -> Counter:
-
         """
         This function returns a Counter object
         representing valuetypes and values count.
@@ -889,7 +850,6 @@ class DataAnalysis:
     def sort_keys_by_sum(
         self, counter: Counter = None
     ) -> List[Tuple[Hashable, Value]]:
-
         """
         This functions returns keys and
         values sorted by sum of values.
@@ -899,7 +859,6 @@ class DataAnalysis:
         return counter.most_common()
 
     def sort_by_counter(self, *args, **kwargs) -> Iterable[valuetype]:
-
         """
         This functions returns keys, values
         and counters sorted by counters.
@@ -910,7 +869,6 @@ class DataAnalysis:
         )
 
     def sort_by_key(self, *args, **kwargs) -> Iterable[valuetype]:
-
         """
         This functions returns keys, values and counters sorted by counters.
         """
@@ -921,7 +879,6 @@ class DataAnalysis:
     def sort_dict_by_value(
         data: Dict[Hashable, Value], *args, **kwargs
     ) -> Dict[Hashable, Value]:
-
         """
         This functions returns the dict sorted by values.
         """
@@ -932,7 +889,6 @@ class DataAnalysis:
     def sort_statistictype_by_value(
         data: Iterable[statistictype], *args, **kwargs
     ) -> Iterable[statistictype]:
-
         """
         This functions returns statistictypes sorted by values.
         """
@@ -943,7 +899,6 @@ class DataAnalysis:
     def sort_statistictype_by_key(
         data: Iterable[statistictype], *args, **kwargs
     ) -> Iterable[statistictype]:
-
         """
         This functions returns statistictypes sorted by keys.
         """
@@ -956,7 +911,6 @@ class DataAnalysis:
         sample_sum: Union[int, float],
         pourcent: bool = True,
     ) -> Union[int, float]:
-
         """
         This function returns the frequence of sample in all.
         """
@@ -974,7 +928,6 @@ class DataAnalysis:
         counter: Counter = None,
         all_sum: Union[int, float] = None,
     ) -> statistictype:
-
         """
         This functions returns a statistictype of key frequence.
         """
@@ -990,7 +943,6 @@ class DataAnalysis:
     def keys_frequences(
         self, pourcent: bool = True, counter: Counter = None
     ) -> Iterable[statistictype]:
-
         """
         This generator yields statistictypes of keys frequences.
         """
@@ -1009,7 +961,6 @@ class DataAnalysis:
         counter: Counter = None,
         all_sum: Union[int, float] = None,
     ) -> statistictype:
-
         """
         This function returns a statistictype of
         the frequency of the sum of the values in
@@ -1027,7 +978,6 @@ class DataAnalysis:
     def keys_values_frequences(
         self, pourcent: bool = True, counter: Counter = None
     ) -> Iterable[statistictype]:
-
         """
         This generator yields statistictypes of
         the frequency of the sum of the values in
@@ -1048,7 +998,6 @@ class DataAnalysis:
         counter: Counter = None,
         all_sum: Union[int, float] = None,
     ) -> statistictype:
-
         """
         This function returns a statistictype of
         the frequency of the sum of the values in
@@ -1066,7 +1015,6 @@ class DataAnalysis:
     def keys_values_count_frequences(
         self, pourcent: bool = True, counter: Counter = None
     ) -> Iterable[statistictype]:
-
         """
         This generator yields statistictypes of
         the frequency of the sum of the values in
@@ -1087,7 +1035,6 @@ class DataAnalysis:
         counter: Counter = None,
         all_sum: Union[int, float] = None,
     ) -> statistictype:
-
         """
         This functions returns a statistictype of value frequence.
         """
@@ -1103,7 +1050,6 @@ class DataAnalysis:
     def values_frequences(
         self, pourcent: bool = True, counter: Counter = None
     ) -> Iterable[statistictype]:
-
         """
         This generator yields statistictypes of values frequences.
         """
@@ -1123,7 +1069,6 @@ class DataAnalysis:
         *args,
         **kwargs,
     ) -> Iterable[DataAnalysis]:
-
         """
         This function returns a DataAnalysis instance
         for each group formatted by columns values.
@@ -1139,7 +1084,6 @@ class DataAnalysis:
 
     @staticmethod
     def statistictypes_printer(data: Iterable[statistictype]) -> None:
-
         """
         This function prints statistictypes.
         """
@@ -1150,7 +1094,6 @@ class DataAnalysis:
 
     @staticmethod
     def valuetypes_printer(data: Iterable[valuetype]) -> None:
-
         """
         This function prints valuetypes.
         """
@@ -1170,7 +1113,6 @@ class DataAnalysis:
         headers: Dict[Hashable, Union[str, int]] = {},
         onetime: bool = False,
     ) -> None:
-
         """
         This function prints data.
 
@@ -1183,7 +1125,6 @@ class DataAnalysis:
         def get_row(
             element: Dict[Hashable, Value], is_key: bool = False
         ) -> str:
-
             """
             This function format an element to be printed.
             """
@@ -1239,7 +1180,6 @@ class DataAnalysis:
         color=None,
         **kwargs,
     ) -> None:
-
         """
         This function shows a matplotlib chart of statistictypes.
         """
@@ -1264,7 +1204,6 @@ class DataAnalysis:
         color=None,
         **kwargs,
     ) -> None:
-
         """
         This function shows a matplotlib chart of valuetypes.
         """
@@ -1281,7 +1220,6 @@ class DataAnalysis:
         color=None,
         **kwargs,
     ) -> None:
-
         """
         This function shows a matplotlib chart of statistictypes.
         """
@@ -1307,7 +1245,6 @@ class DataAnalysis:
         color=None,
         **kwargs,
     ) -> None:
-
         """
         This function shows a matplotlib chart.
         """

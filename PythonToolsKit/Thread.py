@@ -80,7 +80,6 @@ class SimpleThread(Thread):
 
 
 def threadify(function: Callable) -> Callable:
-
     """
     This decorator implements a simple way to
     call a function in a new thread.
@@ -88,14 +87,12 @@ def threadify(function: Callable) -> Callable:
 
     @wraps(function)
     def wrapper(*args, **kwargs) -> SimpleThread:
-
         return SimpleThread(function, *args, **kwargs)
 
     return wrapper
 
 
 def join_all():
-
     """
     This function get all threads and join it.
 

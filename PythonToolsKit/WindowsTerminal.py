@@ -97,7 +97,6 @@ delete_persistent_terminal_transparency = (
 ) = delete_persistent_virtual_terminal = lambda: None
 
 if name == "nt":
-
     from winreg import (
         CreateKey,
         OpenKey,
@@ -139,7 +138,6 @@ if name == "nt":
     LWA_COLORKEY: DWORD = DWORD(0x00000001)
 
     def desactive_virtual_terminal() -> bool:
-
         """
         This function desactive terminal colors on Windows.
 
@@ -173,7 +171,6 @@ if name == "nt":
         return True
 
     def active_virtual_terminal() -> bool:
-
         """
         This function active terminal colors on Windows.
 
@@ -222,7 +219,6 @@ if name == "nt":
         return True
 
     def persistent_virtual_terminal() -> None:
-
         """
         This function adds a virtual terminal persistent
         configuration using the registry.
@@ -238,7 +234,6 @@ if name == "nt":
         CloseKey(key)
 
     def delete_persistent_virtual_terminal() -> None:
-
         """
         This function deletes the virtual terminal persistent
         configuration using the registry.
@@ -254,7 +249,6 @@ if name == "nt":
         CloseKey(key)
 
     def persistent_terminal_transparency(level: int) -> None:
-
         """
         This function adds a terminal transparency persistent
         configuration using the registry.
@@ -274,7 +268,6 @@ if name == "nt":
         CloseKey(key)
 
     def delete_persistent_terminal_transparency() -> None:
-
         """
         This function deletes the terminal transparency
         persistent configuration using the registry.
@@ -290,7 +283,6 @@ if name == "nt":
         CloseKey(key)
 
     def set_terminal_transparency(level: int) -> bool:
-
         """
         This function sets the terminal transparency on Windows.
 
@@ -317,7 +309,6 @@ if name == "nt":
         return False
 
     def set_color_transparency(color: int) -> bool:
-
         """
         This function sets the transparent color of the window.
 

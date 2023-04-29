@@ -115,7 +115,6 @@ invalid_json_example2 = """{
 
 
 def get_valid_json(json: str) -> str:
-
     """
     This function returns a valid JSON from invalid JSON.
 
@@ -140,7 +139,6 @@ def get_valid_json(json: str) -> str:
 
 
 def load_invalid_json(json: str) -> Any:
-
     """
     This function load invalid JSON.
 

@@ -69,7 +69,6 @@ from typing import List, Any, Iterator
 
 
 def def_Function(function: Callable) -> Callable:
-
     """
     This decorator transform basic function in Function.
     """
@@ -90,7 +89,6 @@ class Function(Callable):
         return self.function(*args, **kwargs)
 
     def __lshift__(self, other: Iterator) -> List[Any]:
-
         """
         This function implements '<Function> << <Iterator>'.
         """

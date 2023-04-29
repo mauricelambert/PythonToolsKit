@@ -117,7 +117,6 @@ def get_boolean(
     true_values: Iterator[str] = ("yes", "on", "1", "true", "y"),
     false_values: Iterator[str] = ("no", "off", "0", "false", "n"),
 ) -> None:
-
     """
     This function returns a boolean from string value.
 
@@ -218,7 +217,6 @@ def get_boolean(
 
 
 def is_number(value: str, raise_exception: bool) -> bool:
-
     """
     This function checks value for valid number.
 
@@ -249,7 +247,6 @@ def is_number(value: str, raise_exception: bool) -> bool:
 def get_step(
     value: str, step_char: str, step_default: int, raise_exception: bool
 ) -> Tuple[float, str]:
-
     """
     This function returns the step value.
 
@@ -281,7 +278,6 @@ def get_step(
 
 
 def drange(start: float, stop: float, step: float = 1) -> Iterator[float]:
-
     """
     This function implements range for Decimal value.
 
@@ -320,7 +316,6 @@ def get_numbers(
     generator_char: str = "-",
     raise_exception: bool = True,
 ) -> Iterator[float]:
-
     """
     This function yields integers from string value.
 
@@ -400,7 +395,6 @@ def get_numbers(
 
 
 def try_type(value: str) -> Any:
-
     """
     This function returns a typed value (be careful with this function,
     detection can be bad (example: if you want a string of number this
@@ -455,7 +449,6 @@ def try_type(value: str) -> Any:
 
 
 def is_ip(value: str, raise_exception: bool) -> bool:
-
     """
     This function valids IPv4 addresses.
 
@@ -517,7 +510,6 @@ def is_ip(value: str, raise_exception: bool) -> bool:
 
 
 def get_ips(ip1: ip_address, ip2: ip_address) -> Iterator[ip_address]:
-
     """
     This function yields IP addresses from first IP to second.
 
@@ -546,7 +538,6 @@ def get_ipv4_addresses(
     generator_char: str = "-",
     raise_exception: bool = True,
 ) -> Iterator[IPv4Address]:
-
     """
     This function yields ip addresses.
 
@@ -597,7 +588,6 @@ def get_ipv4_addresses(
 
     for ip in ips:
         if "/" in ip:
-
             ip_, network = ip.split("/", 1)
             if (
                 is_ip(ip_, raise_exception)
@@ -614,7 +604,6 @@ def get_ipv4_addresses(
                 yield default
 
         elif generator_char in ip:
-
             value1, value2 = ip.split(generator_char, 1)
             if is_ip(value1, raise_exception) or is_ip(
                 value2, raise_exception

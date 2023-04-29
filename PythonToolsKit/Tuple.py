@@ -83,7 +83,6 @@ from typing import Tuple, Any
 
 class tuple(tuple):
     def __or__(self, other: Callable) -> Tuple[Any]:
-
         """
         This function implements '<tuple> | <function>'.
         """
@@ -91,7 +90,6 @@ class tuple(tuple):
         return tuple(other(x) for x in self)
 
     def __ior__(self, other: Callable) -> Tuple[Any]:
-
         """
         This function implements '<tuple> |= <function>'.
         """
@@ -99,7 +97,6 @@ class tuple(tuple):
         return tuple(other(x) for x in self)
 
     def __invert__(self) -> Tuple[Any]:
-
         """
         This function implements '~<tuple>'.
         """
@@ -107,7 +104,6 @@ class tuple(tuple):
         return self[::-1]
 
     def __inv__(self) -> Tuple[Any]:
-
         """
         This function implements '~<tuple>'.
         """
@@ -115,7 +111,6 @@ class tuple(tuple):
         return self[::-1]
 
     def __sub__(self, other: Iterator[Any]) -> Tuple[Any]:
-
         """
         This function implements '<tuple> - <Iterator>'
         """
@@ -123,7 +118,6 @@ class tuple(tuple):
         return tuple(x for x in self if x not in other)
 
     def __isub__(self, other: Iterator[Any]) -> Tuple[Any]:
-
         """
         This function implements '<tuple> -= <Iterator>'
         """

@@ -97,7 +97,6 @@ from random import randint, choices
 def get_number_function(
     numbers: Union[int, Tuple[int, int]], secure: bool = False
 ) -> Callable:
-
     """
     This function returns a function to get (random) number.
     """
@@ -124,7 +123,6 @@ def get_random_strings(
     latin1: bool = False,
     check_strong: bool = False,
 ) -> Union[str, List[str]]:
-
     """
     This function generates random strings.
     """

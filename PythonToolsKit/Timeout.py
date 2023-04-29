@@ -147,7 +147,6 @@ pid: str = environ.setdefault("PID", current_pid)
 
 
 def thread_quit_timeout(function_name: str) -> None:
-
     """
     This function raise a TimeoutError in the current
     thread and a KeyboardInterrupt in the main thread.
@@ -161,7 +160,6 @@ def thread_quit_timeout(function_name: str) -> None:
 
 
 def thread_timeout(seconds: int) -> Callable:
-
     """
     This decorator implements a function timeout.
     """
@@ -207,7 +205,6 @@ class _ProcessObject:
 
 
 def _process_timeout(process_obj: _ProcessObject) -> None:
-
     """
     This function puts state and output or error in Queue.
     """
@@ -223,14 +220,12 @@ def _process_timeout(process_obj: _ProcessObject) -> None:
 
 
 def process_timeout(seconds: int) -> Callable:
-
     """
     This decorator implements a function timeout.
     """
 
     def decorator(function: Callable) -> Callable:
         def wrapper(*args, **kwargs) -> Any:
-
             if type(function) == classmethod:
                 args = args[1:]
                 real_function = function.__func__
@@ -286,7 +281,6 @@ if is_linux:
     __all__.append("signal_timeout")
 
     def signal_quit_timeout(signum, frame) -> None:
-
         """
         This function raise a TimeoutError.
         """
@@ -294,7 +288,6 @@ if is_linux:
         raise TimeoutError()
 
     def signal_timeout(seconds: int) -> Callable:
-
         """
         This decorator implements a function timeout.
         """

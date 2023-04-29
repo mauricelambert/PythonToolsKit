@@ -3,7 +3,7 @@
 
 ###################
 #    This package implements tools to build python package and tools.
-#    Copyright (C) 2022  Maurice Lambert
+#    Copyright (C) 2022, 2023  Maurice Lambert
 
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
 This package implements tools to build python package and tools.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -35,7 +35,7 @@ license = "GPL-3.0 License"
 __url__ = "https://github.com/mauricelambert/PythonToolsKit"
 
 copyright = """
-PythonToolsKit  Copyright (C) 2022  Maurice Lambert
+PythonToolsKit  Copyright (C) 2022, 2023  Maurice Lambert
 This program comes with ABSOLUTELY NO WARRANTY.
 This is free software, and you are welcome to redistribute it
 under certain conditions.
@@ -92,7 +92,6 @@ class Terminal:
     #############
 
     def bell() -> None:
-
         """
         This function play system sound.
         """
@@ -101,7 +100,6 @@ class Terminal:
         stdout_flush()
 
     def backspace() -> None:
-
         """
         This function places the cursor on the precedent character.
         """
@@ -110,7 +108,6 @@ class Terminal:
         stdout_flush()
 
     def tab() -> None:
-
         """
         This function places the cursor on the next multiple of 8.
         """
@@ -119,7 +116,6 @@ class Terminal:
         stdout_flush()
 
     def line_feed() -> None:
-
         """
         This function places the cursor on the next line.
         """
@@ -128,7 +124,6 @@ class Terminal:
         stdout_flush()
 
     def carriage_return() -> None:
-
         """
         This function places the cursor on the first column.
         """
@@ -141,7 +136,6 @@ class Terminal:
     #############
 
     def save_position() -> None:
-
         """
         This function saves the cursor position.
         """
@@ -150,7 +144,6 @@ class Terminal:
         stdout_flush()
 
     def restore_position() -> None:
-
         """
         This function restore the saved position.
         """
@@ -159,7 +152,6 @@ class Terminal:
         stdout_flush()
 
     def clean() -> None:
-
         """
         This function cleans the console.
         """
@@ -172,7 +164,6 @@ class Terminal:
     #############
 
     def cursor_up(n: int = 0) -> None:
-
         """
         This function go to the precedent line
         (keep the same position on the precedent line).
@@ -182,7 +173,6 @@ class Terminal:
         stdout_flush()
 
     def cursor_down(n: int = 0) -> None:
-
         """
         This function got to the next line
         (keep the same position on the next line).
@@ -192,7 +182,6 @@ class Terminal:
         stdout_flush()
 
     def cursor_forward(n: int = 0) -> None:
-
         """
         This function go to the next character.
         """
@@ -201,7 +190,6 @@ class Terminal:
         stdout_flush()
 
     def cursor_back(n: int = 0) -> None:
-
         """
         This function go to the precedent character.
         """
@@ -210,7 +198,6 @@ class Terminal:
         stdout_flush()
 
     def cursor_next_line(n: int = 0) -> None:
-
         """
         This function go to the next line
         (on the first character of the next line).
@@ -220,7 +207,6 @@ class Terminal:
         stdout_flush()
 
     def cursor_previous_line(n: int = 0) -> None:
-
         """
         This function go to the precedent line
         (on the first character of the precedent line).
@@ -230,7 +216,6 @@ class Terminal:
         stdout_flush()
 
     def cursor_horizontal_absolute(n: int = 0) -> None:
-
         """
         This function go to the start of the line.
         """
@@ -239,7 +224,6 @@ class Terminal:
         stdout_flush()
 
     def cursor_position(line: int, position: int) -> None:
-
         """
         This function go to line:position.
         """
@@ -248,7 +232,6 @@ class Terminal:
         stdout_flush()
 
     def erase_in_display(mode: int = 0) -> None:
-
         """
         This function clears a part of the screen.
 
@@ -267,7 +250,6 @@ class Terminal:
         stdout_flush()
 
     def erase_in_line(n: int = 0) -> None:
-
         """
         This function clears a part of the line.
         """
@@ -276,7 +258,6 @@ class Terminal:
         stdout_flush()
 
     def scroll_up(n: int = 0) -> None:
-
         """
         This function scroll whole page up.
         """
@@ -285,7 +266,6 @@ class Terminal:
         stdout_flush()
 
     def scroll_down(n: int = 0) -> None:
-
         """
         This function scroll whole page down.
         """
@@ -296,7 +276,6 @@ class Terminal:
     def cursor_horizontale_verticale_position(
         line: int, position: int
     ) -> None:
-
         """
         This function go to line:position.
         """
@@ -305,7 +284,6 @@ class Terminal:
         stdout_flush()
 
     def device_status_report() -> Tuple[bytes, bytes]:
-
         """
         This function reports the cursor position.
         """
@@ -333,7 +311,6 @@ class Terminal:
         return precedent, position
 
     def save_current_cursor_position() -> None:
-
         """
         This function save the cursor position.
         """
@@ -342,7 +319,6 @@ class Terminal:
         stdout_flush()
 
     def restore_saved_cursor_position() -> None:
-
         """
         This function save the cursor position.
         """
@@ -355,7 +331,6 @@ class Terminal:
     #############
 
     def reset() -> None:
-
         """
         This function resets colors (background and foreground).
         """
@@ -364,7 +339,6 @@ class Terminal:
         stdout_flush()
 
     def bold() -> None:
-
         """
         This function adds bold.
         """
@@ -373,7 +347,6 @@ class Terminal:
         stdout_flush()
 
     def faint() -> None:
-
         """
         This function adds intensity.
         """
@@ -382,7 +355,6 @@ class Terminal:
         stdout_flush()
 
     def italic() -> None:
-
         """
         This function adds italic.
         """
@@ -391,7 +363,6 @@ class Terminal:
         stdout_flush()
 
     def underline() -> None:
-
         """
         This function adds underline.
         """
@@ -400,7 +371,6 @@ class Terminal:
         stdout_flush()
 
     def slow_blink() -> None:
-
         """
         Sets blinking to less than 150 times per minute.
         """
@@ -409,7 +379,6 @@ class Terminal:
         stdout_flush()
 
     def rapid_blink() -> None:
-
         """
         Sets blinking to greter than 150 times per minute.
         """
@@ -418,7 +387,6 @@ class Terminal:
         stdout_flush()
 
     def reverse() -> None:
-
         """
         This function reverses colors (background/foreground).
         """
@@ -427,7 +395,6 @@ class Terminal:
         stdout_flush()
 
     def hide() -> None:
-
         """
         This function adds hide.
         """
@@ -436,7 +403,6 @@ class Terminal:
         stdout_flush()
 
     def strike() -> None:
-
         """
         Characters legible but marked as if for deletion.
         """
@@ -445,7 +411,6 @@ class Terminal:
         stdout_flush()
 
     def font(font: int) -> None:
-
         """
         This function changes font.
         """
@@ -458,7 +423,6 @@ class Terminal:
         stdout_flush()
 
     def gothic() -> None:
-
         """
         Characters legible but marked as if for deletion.
         """
@@ -467,7 +431,6 @@ class Terminal:
         stdout_flush()
 
     def no_bold() -> None:
-
         """
         This function removes bold.
         """
@@ -476,7 +439,6 @@ class Terminal:
         stdout_flush()
 
     def no_intensity() -> None:
-
         """
         This function removes intensity.
         """
@@ -485,7 +447,6 @@ class Terminal:
         stdout_flush()
 
     def no_italic() -> None:
-
         """
         This function removes italic.
         """
@@ -494,7 +455,6 @@ class Terminal:
         stdout_flush()
 
     def no_underline() -> None:
-
         """
         This function removes underline.
         """
@@ -503,7 +463,6 @@ class Terminal:
         stdout_flush()
 
     def no_blink() -> None:
-
         """
         This function removes underline.
         """
@@ -512,7 +471,6 @@ class Terminal:
         stdout_flush()
 
     def no_reverse() -> None:
-
         """
         This function replace colors (background/foreground).
         """
@@ -521,7 +479,6 @@ class Terminal:
         stdout_flush()
 
     def no_hide() -> None:
-
         """
         This function removes hide.
         """
@@ -530,7 +487,6 @@ class Terminal:
         stdout_flush()
 
     def not_crossed_out() -> None:
-
         """
         This function removes hide.
         """
@@ -541,7 +497,6 @@ class Terminal:
     def change_foreground_color_3bytes(
         red: int, green: int, blue: int
     ) -> None:
-
         """
         This function changes foreground color
         using the 3 bytes mode.
@@ -556,7 +511,6 @@ class Terminal:
         stdout_flush()
 
     def change_foreground_color_8bits(color: int) -> None:
-
         """
         This function changes foreground color
         using the 8 bits mode.
@@ -581,7 +535,6 @@ class Terminal:
     def change_background_color_3bytes(
         red: int, green: int, blue: int
     ) -> None:
-
         """
         This function changes background color
         using the 3 bytes mode.
@@ -603,7 +556,6 @@ class Terminal:
         stdout_flush()
 
     def change_background_color_8bits(color: int) -> None:
-
         """
         This function changes background color
         using the 8 bits mode.
@@ -616,7 +568,6 @@ class Terminal:
         stdout_flush()
 
     def change_foreground_color(color: str, mode: int = 1) -> None:
-
         """
         This function changes foreground color.
         """
@@ -639,7 +590,6 @@ class Terminal:
         stdout_flush()
 
     def change_background_color(color: str, mode: int = 1) -> None:
-
         """
         This function changes background color.
         """
@@ -662,26 +612,23 @@ class Terminal:
         stdout_flush()
 
     def reset_background() -> None:
-
         """
         This function resets the background color.
         """
 
-        stdout_write(f"{char_ANSI}39m")
+        stdout_write(f"{char_ANSI}49m")
         stdout_flush()
 
     def reset_foreground() -> None:
-
         """
         This function resets the foreground color.
         """
 
-        stdout_write(f"{char_ANSI}49m")
+        stdout_write(f"{char_ANSI}39m")
         stdout_flush()
 
 
 if platform == "win32":
 
     class Terminal(Terminal):
-
         __doc__ = Terminal.__doc__

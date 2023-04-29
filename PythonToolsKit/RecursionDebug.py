@@ -58,7 +58,6 @@ import sys
 def recurse_excepthook(
     exception_type: type, message: str, traceback: TracebackType
 ):
-
     """
     This function helps you to debug RecursionError.
     """

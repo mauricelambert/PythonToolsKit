@@ -101,14 +101,12 @@ FUNCTIONS_CODES: Dict[int, Callable] = {
 
 
 def httpcode(*args: Sequence[int]) -> Callable:
-
     """
     This decorator change action on HTTP error
     code.
     """
 
     def decorator(function: Callable) -> Callable:
-
         for code in args:
             FUNCTIONS_CODES[code] = function
 
@@ -119,7 +117,6 @@ def httpcode(*args: Sequence[int]) -> Callable:
 
 class OpenerDirector(_OpenerDirector):
     def open(self, *args, context: SSLContext = None, **kwargs) -> Any:
-
         """
         This function implements the default URL opener.
         """
@@ -131,7 +128,6 @@ class OpenerDirector(_OpenerDirector):
 
 
 def build_opener(functions: Dict[int, Callable] = None) -> OpenerDirector:
-
     """
     This function creates an opener object
     using default handlers.
@@ -167,14 +163,12 @@ class DefaultHandler(BaseHandler):
         self.functions_get = functions.get
 
     def httpcode(self, *args: Sequence[int]) -> Callable:
-
         """
         This decorator change action on HTTP error
         code.
         """
 
         def decorator(function: Callable) -> Callable:
-
             for code in args:
                 FUNCTIONS_CODES[code] = function
 
@@ -187,7 +181,6 @@ class DefaultHandler(BaseHandler):
         request: Request,
         response: HTTPResponse,
     ) -> None:
-
         code: int = response.code
         message: str = response.msg
         headers: HTTPMessage = response.info()

@@ -82,7 +82,6 @@ from typing import List, Any
 
 class list(list):
     def __or__(self, other: Callable) -> List[Any]:
-
         """
         This function implements '<list> | <function>'.
         """
@@ -90,7 +89,6 @@ class list(list):
         return [other(x) for x in self]
 
     def __ior__(self, other: Callable) -> List[Any]:
-
         """
         This function implements '<list> |= <function>'.
         """
@@ -98,7 +96,6 @@ class list(list):
         return [other(x) for x in self]
 
     def __invert__(self) -> List[Any]:
-
         """
         This function implements '~<list>'.
         """
@@ -106,7 +103,6 @@ class list(list):
         return self[::-1]
 
     def __inv__(self) -> List[Any]:
-
         """
         This function implements '~<list>'.
         """
@@ -114,7 +110,6 @@ class list(list):
         return self[::-1]
 
     def __sub__(self, other: Iterator[Any]) -> List[Any]:
-
         """
         This function implements '<list> - <Iterator>'
         """
@@ -122,7 +117,6 @@ class list(list):
         return [x for x in self if x not in other]
 
     def __isub__(self, other: Iterator[Any]) -> List[Any]:
-
         """
         This function implements '<list> -= <Iterator>'
         """

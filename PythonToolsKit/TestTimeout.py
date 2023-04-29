@@ -57,7 +57,6 @@ if __name__ == "__main__":
 
 
 class Test2:
-
     test_ = True
 
     def __init__(self):

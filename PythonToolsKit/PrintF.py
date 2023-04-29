@@ -127,7 +127,6 @@ def printf(
     oneline_progress: bool = False,
     **kwargs,
 ) -> None:
-
     """
     This function prints formatted and colored information and progression.
     """

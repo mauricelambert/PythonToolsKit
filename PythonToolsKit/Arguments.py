@@ -93,7 +93,6 @@ vprint = partial(print, "[V]")
 
 
 def set_verbose(verbose_function: Callable = vprint) -> None:
-
     """
     This function sets verbose mode.
     """
@@ -115,7 +114,6 @@ def set_verbose(verbose_function: Callable = vprint) -> None:
 
 
 def set_debug() -> None:
-
     """
     This function sets log level for all loggers.
     """
@@ -151,7 +149,6 @@ class ArgumentParser(_ArgumentParser):
         prompt_kwargs: Dict[str, Any] = {},
         mutually_group_kwargs: Dict[str, Any] = {},
     ) -> Tuple[_MutuallyExclusiveGroup, _StoreAction, _StoreAction]:
-
         """
         This function add password argument and password prompt
         arguments.
@@ -195,7 +192,6 @@ class ArgumentParser(_ArgumentParser):
         file_kwargs: Dict[str, Any] = {},
         **kwargs,
     ) -> _StoreAction:
-
         """
         This function add input file argument.
 
@@ -230,7 +226,6 @@ class ArgumentParser(_ArgumentParser):
         file_kwargs: Dict[str, Any] = {},
         **kwargs,
     ) -> _StoreAction:
-
         """
         This function add output file argument.
 
@@ -265,7 +260,6 @@ class ArgumentParser(_ArgumentParser):
     def add_verbose(
         self, *args, function: Callable = vprint, **kwargs
     ) -> _StoreAction:
-
         """
         This method adds verbose argument to the parser.
         """
@@ -288,7 +282,6 @@ class ArgumentParser(_ArgumentParser):
         return argument
 
     def add_debug(self, *args, **kwargs) -> _StoreAction:
-
         """
         This method adds debug argument to the parser.
         """
@@ -310,7 +303,6 @@ class ArgumentParser(_ArgumentParser):
         return argument
 
     def parse_args(self, *args, **kwargs) -> Namespace:
-
         """
         This function parse command line arguments.
         """

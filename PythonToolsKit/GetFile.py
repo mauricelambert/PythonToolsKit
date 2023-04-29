@@ -64,7 +64,6 @@ system: str = system()
 
 
 def get_real_path(file_path: str, module_path: str = None) -> str:
-
     """
     This function researchs a file from current
     directory and lib directory.
@@ -105,7 +104,6 @@ def get_real_path(file_path: str, module_path: str = None) -> str:
 
 
 def open(file_path: str, *args, **kwargs) -> TextIOWrapper:
-
     """
     This function researchs a file from current
     directory and lib directory and open it.

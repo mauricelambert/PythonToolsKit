@@ -113,7 +113,7 @@ class Characters:
     INT: 97 98 99
     HEXA: 61 62 63
     BINARY: 01100001 01100010 01100011
-    >>> 
+    >>>
     """
 
     def __init__(self):
@@ -121,26 +121,25 @@ class Characters:
         self.string: str = None
         self.bin: List[str] = None
         self.int: List[int] = None
-        self.translate = str.maketrans('', '', ': -')
+        self.translate = str.maketrans("", "", ": -")
 
     def __str__(self) -> str:
         return (
             f"TEXT: {self.text}\nINT: {' '.join([str(x) for x in self.int])}"
             f"\nHEXA: {self.hexa}\nBINARY: {' '.join(self.bin)}"
         )
-        
+
     def __repr__(self) -> str:
         return self.__class__.__name__ + "(" + self.__str__() + ")"
 
     def from_string(self, data: str) -> Tuple[str, List[int], str, List[str]]:
-
         """
         This method returns integers, hexadecimal and binary from string.
 
         >>> chars = Characters()
         >>> chars.from_string("abc")
         ('abc', [97, 98, 99], '61 62 63', ['01100001', '01100010', '01100011'])
-        >>> 
+        >>>
         """
 
         text = self.text = data
@@ -150,15 +149,16 @@ class Characters:
 
         return text, integers, hexa, binary
 
-    def from_int(self, data: List[int]) -> Tuple[str, List[int], str, List[str]]:
-
+    def from_int(
+        self, data: List[int]
+    ) -> Tuple[str, List[int], str, List[str]]:
         """
         This method returns string, hexadecimal and binary from integers.
 
         >>> chars = Characters()
         >>> chars.from_int([97, 98, 99])
         ('abc', [97, 98, 99], '61 62 63', ['01100001', '01100010', '01100011'])
-        >>> 
+        >>>
         """
 
         integers = self.int = data
@@ -168,8 +168,9 @@ class Characters:
 
         return text, integers, hexa, binary
 
-    def from_bytes(self, encoded: bytes) -> Tuple[str, List[int], str, List[str]]:
-
+    def from_bytes(
+        self, encoded: bytes
+    ) -> Tuple[str, List[int], str, List[str]]:
         """
         This method returns string, hexadecimal, integers and binary from bytes.
 
@@ -181,7 +182,6 @@ class Characters:
         return self.from_int([x for x in encoded])
 
     def from_hexa(self, hexa: str) -> Tuple[str, List[int], str, List[str]]:
-
         """
         This method returns string, integers and binary from hexadecimal.
          - formats accepted: "a1 b4 ff", "A1B4FF" and "A1-b4-Ff"
@@ -197,13 +197,14 @@ class Characters:
         ('abc', [97, 98, 99], '61 62 63', ['01100001', '01100010', '01100011'])
         >>> chars.from_hexa("5e 6F4f")
         ('^oO', [94, 111, 79], '5e 6f 4f', ['01011110', '01101111', '01001111'])
-        >>> 
+        >>>
         """
 
-        return self.from_bytes(b16decode(hexa.translate(self.translate).upper().encode()))
+        return self.from_bytes(
+            b16decode(hexa.translate(self.translate).upper().encode())
+        )
 
     def from_bin(self, binary: str) -> Tuple[str, List[int], str, List[str]]:
-
         """
         This method returns string, hexadecimal, and integers from binary.
          - format accepted: "1100001 1100010 1100011"
@@ -211,7 +212,7 @@ class Characters:
         >>> chars = Characters()
         >>> chars.from_bin('01100001 01100010 01100011')
         ('abc', [97, 98, 99], '61 62 63', ['01100001', '01100010', '01100011'])
-        >>> 
+        >>>
         """
 
         return self.from_int([int(x, 2) for x in binary.split()])

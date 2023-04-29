@@ -80,7 +80,6 @@ else:
     encoding = device_encoding(fileno())
 
     def getch() -> bytes:
-
         """
         This function gets input keyboard and return character.
         """
@@ -98,7 +97,6 @@ else:
 
 
 def getpass(prompt: str = "Password: ", show: str = "*") -> str:
-
     """
     This function prompts for password and show "<show>".
     """

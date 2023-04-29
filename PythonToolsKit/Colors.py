@@ -123,7 +123,6 @@ class Colors:
     """
 
     def check_int_to_html(*args) -> str:
-
         """
         This function performs checks for int_to_html
         arguments and call it.
@@ -155,7 +154,6 @@ class Colors:
         return Colors.int_to_html(*args)
 
     def safe_int_to_html(*args) -> str:
-
         """
         This function performs checks for int_to_html
         arguments and call it.
@@ -180,7 +178,6 @@ class Colors:
         return Colors.int_to_html(*args_)
 
     def int_to_html(red: int, green: int, blue: int) -> str:
-
         """
         This function translates integers colors to HTML colors.
 
@@ -192,7 +189,6 @@ class Colors:
         return "#" + b2a_hex(bytes((red, green, blue))).decode()
 
     def check_html_to_int(color: str) -> Tuple[int, int, int]:
-
         """
         This function performs checks for html_to_int
         arguments and call it.
@@ -233,7 +229,6 @@ class Colors:
         return Colors.html_to_int(color)
 
     def safe_html_to_int(color: str) -> Tuple[int, int, int]:
-
         """
         This function performs checks for html_to_int
         arguments and call it.
@@ -259,7 +254,6 @@ class Colors:
         return Colors.html_to_int(color_)
 
     def html_to_int(colors: str) -> Tuple[int, int, int]:
-
         """
         This function translates HTML colors to integers colors.
 
@@ -273,7 +267,6 @@ class Colors:
         return tuple(x for x in a2b_hex(colors[1:].encode()))
 
     def check_rgb_to_int(color: str) -> Tuple[int, int, int]:
-
         """
         This function performs checks for rgb_to_int
         arguments and call it.
@@ -341,7 +334,6 @@ class Colors:
         return Colors.rgb_to_int(color)
 
     def safe_rgb_to_int(color: str) -> Tuple[int, int, int]:
-
         """
         This function performs checks for rgb_to_int
         arguments and call it.
@@ -381,7 +373,6 @@ class Colors:
         return Colors.rgb_to_int(color_[:-2] + ")")
 
     def rgb_to_int(colors: str) -> Tuple[int, int, int]:
-
         """
         This function translates RGB (CSS function)
         colors to integers colors.
@@ -394,7 +385,6 @@ class Colors:
         return tuple(int(x) for x in colors.strip("rgb() ").split(","))
 
     def check_rgba_to_int(color: str) -> Tuple[int, int, int]:
-
         """
         This function performs checks for rgba_to_int
         arguments and call it.
@@ -474,7 +464,6 @@ class Colors:
         return Colors.rgba_to_int(color)
 
     def safe_rgba_to_int(color: str) -> Tuple[int, int, int]:
-
         """
         This function performs checks for rgba_to_int
         arguments and call it.
@@ -514,7 +503,6 @@ class Colors:
         return Colors.rgba_to_int(color_ + "0.5)")
 
     def rgba_to_int(colors: str) -> Tuple[int, int, int]:
-
         """
         This function translates RGBA (CSS function)
         colors to integers colors.
@@ -527,7 +515,6 @@ class Colors:
         return tuple(int(x) for x in colors.strip("rgba() ").split(",")[:3])
 
     def check_int_to_rgba(*args) -> str:
-
         """
         This function performs checks for int_to_rgba
         arguments and call it.
@@ -571,7 +558,6 @@ class Colors:
         return Colors.int_to_rgba(*args[:4])
 
     def safe_int_to_rgba(*args) -> str:
-
         """
         This function performs checks for int_to_rgba
         arguments and call it.
@@ -609,7 +595,6 @@ class Colors:
     def int_to_rgba(
         red: int, green: int, blue: int, transparency: float = 1
     ) -> str:
-
         """
         This function translates integers
         colors to RGBA (CSS function) colors.
@@ -622,7 +607,6 @@ class Colors:
         return f"rgba({red}, {green}, {blue}, {transparency})"
 
     def check_int_to_rgb(*args) -> str:
-
         """
         This function performs checks for int_to_rgb
         arguments and call it.
@@ -654,7 +638,6 @@ class Colors:
         return Colors.int_to_rgb(*args)
 
     def safe_int_to_rgb(*args) -> str:
-
         """
         This function performs checks for int_to_rgb
         arguments and call it.
@@ -679,7 +662,6 @@ class Colors:
         return Colors.int_to_rgb(*args_)
 
     def int_to_rgb(red: int, green: int, blue: int) -> str:
-
         """
         This function translates integers
         colors to RGB (CSS function) colors.
@@ -692,7 +674,6 @@ class Colors:
         return f"rgb({red}, {green}, {blue})"
 
     def check_get_8bits_color(*args) -> int:
-
         """
         This function performs checks for get_8bits_color
         arguments and call it.
@@ -731,7 +712,6 @@ class Colors:
         return Colors.get_8bits_color(*args)
 
     def safe_get_8bits_color(*args) -> int:
-
         """
         This function performs checks for get_8bits_color
         arguments and call it.
@@ -760,7 +740,6 @@ class Colors:
         return Colors.get_8bits_color(*args_)
 
     def get_8bits_color(red: int, green: int, blue: int) -> int:
-
         """
         This function returns integer (0-255) representing 8bits-1byte colors.
 
