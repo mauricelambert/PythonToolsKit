@@ -359,7 +359,7 @@ TOTAL               290      0   100%
 ~#
 """
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -388,6 +388,7 @@ from statistics import fmean, median, pstdev, variance
 from functools import partial
 from datetime import datetime
 from operator import gt, lt
+from sys import argv
 
 try:
     from matplotlib.pyplot import bar, show, title
