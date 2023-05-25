@@ -3,7 +3,7 @@
 
 ###################
 #    This package implements tools to build python package and tools.
-#    Copyright (C) 2021  Maurice Lambert
+#    Copyright (C) 2021, 2022, 2023  Maurice Lambert
 
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -67,7 +67,7 @@ This package implements tools to build python package and tools.
 >>>
 """
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __author__ = "Maurice Lambert"
 __author_email__ = "mauricelambert434@gmail.com"
 __maintainer__ = "Maurice Lambert"
@@ -79,7 +79,7 @@ license = "GPL-3.0 License"
 __url__ = "https://github.com/mauricelambert/PythonToolsKit"
 
 copyright = """
-PythonToolsKit  Copyright (C) 2022  Maurice Lambert
+PythonToolsKit  Copyright (C) 2021, 2022, 2023  Maurice Lambert
 This program comes with ABSOLUTELY NO WARRANTY.
 This is free software, and you are welcome to redistribute it
 under certain conditions.
@@ -150,7 +150,7 @@ def printf(
         )
 
     if has_pourcent:
-        progress_bar = f"{pourcent}% {progress_bar}\x1b[0m{end}\x1b[F"
+        progress_bar = f"{pourcent}% {progress_bar}\x1b[39m{end}\x1b[F"
         if not oneline_progress:
             progress_bar = f"{color}{show} {progress_bar}"
 
@@ -158,7 +158,7 @@ def printf(
         to_print = f"\x1b[K{start}{color}{show} {string} {progress_bar}"
     else:
         to_print = (
-            f"\x1b[K{start}{color}{show} {string}\x1b[0m{end}"
+            f"\x1b[K{start}{color}{show} {string}\x1b[39m{end}"
             f"{progress_bar}"
         )
 
