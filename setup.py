@@ -133,7 +133,8 @@ setup(
     entry_points={
         "console_scripts": [
             "Characters = PythonToolsKit.Characters:main",
-            "DebugEncoding = PythonToolsKit.DebugEncoding:main"
+            "DebugEncoding = PythonToolsKit.DebugEncoding:main",
+            "ColoredDocumentationHtml = PythonToolsKit.ColoredDocumentationHtml:main",
         ],
     },
     platforms=["Windows", "Linux", "MacOS"],

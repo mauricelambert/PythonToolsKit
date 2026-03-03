@@ -124,6 +124,8 @@ Features implemented:
  - OrdDict: A fast and powerful *Ordered Dict*
  - Characters: Returns integers, string (latin-1), binary and hexadecimal from integers, string (latin-1), binary or hexadecimal
  - DebugEncoding: Found used encoding when you have encoding problems
+ - ColoredDocumentationHtml: Tool to generate a pydoc colored HTML page for documentation
+ - EnhancedStructure: Library to implement a Enhanced Structure with MetaFields (pretty print, to dict, to HTML, Enum and Flag fields with names and descriptions, ...)
 
 ## Requirements
 
@@ -138,8 +140,36 @@ This package require:
 
 ## Installation
 
+### Pip
+
 ```bash
-pip install PythonToolsKit
+python3 -m pip install PythonToolsKit
+```
+
+### Git
+
+```bash
+git clone "https://github.com/mauricelambert/PythonToolsKit.git"
+cd "PythonToolsKit"
+python3 -m pip install .
+```
+
+### Wget
+
+```bash
+wget https://github.com/mauricelambert/PythonToolsKit/archive/refs/heads/main.zip
+unzip main.zip
+cd PythonToolsKit-main
+python3 -m pip install .
+```
+
+### cURL
+
+```bash
+curl -O https://github.com/mauricelambert/PythonToolsKit/archive/refs/heads/main.zip
+unzip main.zip
+cd PythonToolsKit-main
+python3 -m pip install .
 ```
 
 ## Usages
@@ -187,18 +217,18 @@ coverage report                # Report in console
 coverage html                  # Report in HTML page
 ```
 
-| Module             | Coverage  | Statements | missing    |
-|--------------------|-----------|------------|------------|
-| GetType.py         | 100%      | 130        | 000        |
-| Json.py            | 100%      | 046        | 000        |
-| Encodings.py       | 100%      | 054        | 000        |
-| WindowsTerminal.py | 094%      | 096        | 006        |
-| Colors.py          | 100%      | 176        | 000        |
-| DataAnalysis.py    | 100%      | 290        | 000        |
-| Report.py          | 099%      | 160        | 001        |
-| StringF.py         | 100%      | 067        | 000        |
-| OrdDict.py         | 100%      | 172        | 000        |
-| Characters.py      | 078%      | 063        | 014        |
+| Module                      | Coverage  | Statements | missing    |
+|-----------------------------|-----------|------------|------------|
+| GetType.py                  | 100%      | 130        | 000        |
+| Json.py                     | 100%      | 046        | 000        |
+| Encodings.py                | 100%      | 054        | 000        |
+| WindowsTerminal.py          | 094%      | 096        | 006        |
+| Colors.py                   | 100%      | 176        | 000        |
+| DataAnalysis.py             | 100%      | 290        | 000        |
+| Report.py                   | 099%      | 160        | 001        |
+| StringF.py                  | 100%      | 067        | 000        |
+| OrdDict.py                  | 100%      | 172        | 000        |
+| Characters.py               | 078%      | 063        | 014        |
 
 ## Links
 
@@ -235,6 +265,8 @@ coverage html                  # Report in HTML page
  - [Executable Characters](https://mauricelambert.github.io/info/python/code/PythonToolsKit/Characters.pyz)
  - [Documentation DebugEncoding](https://mauricelambert.github.io/info/python/code/PythonToolsKit/DebugEncoding.html)
  - [Executable DebugEncoding](https://mauricelambert.github.io/info/python/code/PythonToolsKit/DebugEncoding.pyz)
+ - [Executable ColoredDocumentationHtml](https://mauricelambert.github.io/info/python/code/PythonToolsKit/ColoredDocumentationHtml.pyz)
+ - [Windows Executable ColoredDocumentationHtml](https://mauricelambert.github.io/info/python/code/PythonToolsKit/ColoredDocumentationHtml.exe)
  - [Pypi package](https://pypi.org/project/PythonToolsKit/)
 
 ## Licence
